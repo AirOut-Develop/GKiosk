@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+branch="$(git symbolic-ref --quiet --short HEAD || true)"
+
+# Allow pushing tags and HEAD-detached pushes (e.g., CI) without blocking.
+if [[ -z "${branch}" ]]; then
+  exit 0
+fi
+
+case "${branch}" in
+  main)
+    exit 0 ;;
+  DEVELOP/*)
+    if [[ "${branch}" =~ ^DEVELOP/[0-9]{6}_[0-9]{2}_[A-Za-z0-9_-]+$ ]]; then
+      exit 0
+    fi
+    ;;
+  RELEASE/*)
+    if [[ "${branch}" =~ ^RELEASE/[0-9]{6}_V[0-9]+\.[0-9]{2}_[A-Za-z0-9_-]+$ ]]; then
+      exit 0
+    fi
+    ;;
+esac
+
+cat <<EOF
+Push blocked: branch name does not follow the repository convention.
+
+Expected patterns:
+  - main
+  - DEVELOP/YYMMDD_NN_Title        (e.g., DEVELOP/250903_00_UIBaseLayout)
+  - RELEASE/YYMMDD_V0.01_Title     (e.g., RELEASE/250903_V0.01_FirstDrop)
+
+Your branch:
+  ${branch}
+
+Fix by renaming:
+  git branch -m <NewName>
+EOF
+exit 1
+

@@ -40,6 +40,12 @@
   - Link issues (e.g., `Closes #123`).
   - Checklist: builds green, tests/lint pass, no debug logs, resources named per convention.
 
+## Branching & Versioning
+- Development branches: `DEVELOP/YYMMDD_NN_Title` (e.g., `DEVELOP/250903_00_UIBaseLayout`).
+- Release branches: `RELEASE/YYMMDD_V0.01_Title` (e.g., `RELEASE/250903_V0.01_FirstDrop`).
+- Main branch: `main` (protected); merge via PR only.
+- Tip: Use the helper `scripts/new-branch.sh dev|release <Title>` to scaffold names.
+
 ## Security & Configuration
 - Do not commit secrets or keystores. Use Gradle properties/env vars.
 - SDK/NDK paths live in `local.properties` (untracked). Min SDK 27, target/compile SDK 33.

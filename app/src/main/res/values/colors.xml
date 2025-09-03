@@ -1,10 +1,213 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+
+    <!-- Primary brand colors (hex-defined) -->
+    <color name="primary_main">#3E7BFA</color>
+    <color name="primary_darker">#3568D4</color>
+    <color name="primary_lighter">#6698FA</color>
+    <color name="primary_subtle">#CCDDFF</color>
+
+    
+
+    <!-- Base neutrals -->
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+
+    <!-- Theme blacks (0–4) + border -->
+    <color name="black_0">#1C1C28</color>
+    <color name="black_1">#28293D</color>
+    <color name="black_2">#555770</color>
+    <color name="black_3">#8F90A6</color>
+    <color name="black_4">#C7C9D9</color>
+    <color name="black_border">#8F90A6</color>
+
+    <!-- Theme whites (0–4) + border -->
+    <color name="white_0">#E4E4EB</color>
+    <color name="white_1">#EBEBF0</color>
+    <color name="white_2">#F2F2F5</color>
+    <color name="white_3">#FAFAFC</color>
+    <color name="white_4">#FFFFFF</color>
+    <color name="white_border">#E4E4EB</color>
+
+    <!-- Color palettes for Dark (black theme) -->
+    <!-- Red (dark theme) -->
+    <color name="red_dark_0">@color/red_light_0</color>
+    <color name="red_dark_1">@color/red_light_1</color>
+    <color name="red_dark_2">@color/red_light_2</color>
+    <color name="red_dark_3">@color/red_light_3</color>
+    <color name="red_dark_4">@color/red_light_4</color>
+    <color name="red_dark_border">@color/red_light_border</color>
+
+    <!-- Green (dark theme) -->
+    <color name="green_dark_0">@color/green_light_0</color>
+    <color name="green_dark_1">@color/green_light_1</color>
+    <color name="green_dark_2">@color/green_light_2</color>
+    <color name="green_dark_3">@color/green_light_3</color>
+    <color name="green_dark_4">@color/green_light_4</color>
+    <color name="green_dark_border">@color/green_light_border</color>
+
+    <!-- Blue (dark theme) -->
+    <color name="blue_dark_0">@color/blue_light_0</color>
+    <color name="blue_dark_1">@color/blue_light_1</color>
+    <color name="blue_dark_2">@color/blue_light_2</color>
+    <color name="blue_dark_3">@color/blue_light_3</color>
+    <color name="blue_dark_4">@color/blue_light_4</color>
+    <color name="blue_dark_border">@color/blue_light_border</color>
+
+    <!-- Yellow (dark theme) -->
+    <color name="yellow_dark_0">@color/yellow_light_0</color>
+    <color name="yellow_dark_1">@color/yellow_light_1</color>
+    <color name="yellow_dark_2">@color/yellow_light_2</color>
+    <color name="yellow_dark_3">@color/yellow_light_3</color>
+    <color name="yellow_dark_4">@color/yellow_light_4</color>
+    <color name="yellow_dark_border">@color/yellow_light_border</color>
+
+    <!-- Orange (dark theme) -->
+    <color name="orange_dark_0">@color/orange_light_0</color>
+    <color name="orange_dark_1">@color/orange_light_1</color>
+    <color name="orange_dark_2">@color/orange_light_2</color>
+    <color name="orange_dark_3">@color/orange_light_3</color>
+    <color name="orange_dark_4">@color/orange_light_4</color>
+    <color name="orange_dark_border">@color/orange_light_border</color>
+
+    <!-- Teal (dark theme) -->
+    <color name="teal_dark_0">@color/teal_light_0</color>
+    <color name="teal_dark_1">@color/teal_light_1</color>
+    <color name="teal_dark_2">@color/teal_light_2</color>
+    <color name="teal_dark_3">@color/teal_light_3</color>
+    <color name="teal_dark_4">@color/teal_light_4</color>
+    <color name="teal_dark_border">@color/teal_light_border</color>
+
+    <!-- Purple (dark theme) -->
+    <color name="purple_dark_0">@color/purple_light_0</color>
+    <color name="purple_dark_1">@color/purple_light_1</color>
+    <color name="purple_dark_2">@color/purple_light_2</color>
+    <color name="purple_dark_3">@color/purple_light_3</color>
+    <color name="purple_dark_4">@color/purple_light_4</color>
+    <color name="purple_dark_border">@color/purple_light_border</color>
+
+    <!-- Color palettes for Light (white theme) -->
+    <!-- Red (light theme) -->
+    <color name="red_light_0">#E53535</color>
+    <color name="red_light_1">#FF3B3B</color>
+    <color name="red_light_2">#FF5C5C</color>
+    <color name="red_light_3">#FF8080</color>
+    <color name="red_light_4">#FFE5E5</color>
+    <color name="red_light_border">#FF3B3B</color>
+
+    <!-- Green (light theme) -->
+    <color name="green_light_0">#05A660</color>
+    <color name="green_light_1">#06C270</color>
+    <color name="green_light_2">#39D98A</color>
+    <color name="green_light_3">#57EBA1</color>
+    <color name="green_light_4">#E3FFF1</color>
+    <color name="green_light_border">#06C270</color>
+
+    <!-- Blue (light theme) -->
+    <color name="blue_light_0">#004FC4</color>
+    <color name="blue_light_1">#0063F7</color>
+    <color name="blue_light_2">#5B8DEF</color>
+    <color name="blue_light_3">#9DBFF9</color>
+    <color name="blue_light_4">#E5F0FF</color>
+    <color name="blue_light_border">#0063F7</color>
+
+    <!-- Yellow (light theme) -->
+    <color name="yellow_light_0">#E5B800</color>
+    <color name="yellow_light_1">#FFCC00</color>
+    <color name="yellow_light_2">#FDDD48</color>
+    <color name="yellow_light_3">#FDED72</color>
+    <color name="yellow_light_4">#FFFEE5</color>
+    <color name="yellow_light_border">#FFCC00</color>
+
+    <!-- Orange (light theme) -->
+    <color name="orange_light_0">#E57A00</color>
+    <color name="orange_light_1">#FF8800</color>
+    <color name="orange_light_2">#FDAC42</color>
+    <color name="orange_light_3">#FDED72</color>
+    <color name="orange_light_4">#FCCC75</color>
+    <color name="orange_light_border">#FF8800</color>
+
+    <!-- Teal (light theme) -->
+    <color name="teal_light_0">#00B7C4</color>
+    <color name="teal_light_1">#00CFDE</color>
+    <color name="teal_light_2">#73DFE7</color>
+    <color name="teal_light_3">#A9EFF2</color>
+    <color name="teal_light_4">#E5FFFF</color>
+    <color name="teal_light_border">#00CFDE</color>
+
+    <!-- Purple (light theme) -->
+    <color name="purple_light_0">#4D0099</color>
+    <color name="purple_light_1">#6600CC</color>
+    <color name="purple_light_2">#AC5DD9</color>
+    <color name="purple_light_3">#DDA5E9</color>
+    <color name="purple_light_4">#FFE5FF</color>
+    <color name="purple_light_border">#6600CC</color>
+
+    <!-- Auto-resolving aliases (Light default). Use these in layouts/styles. -->
+    <color name="red_0">@color/red_light_0</color>
+    <color name="red_1">@color/red_light_1</color>
+    <color name="red_2">@color/red_light_2</color>
+    <color name="red_3">@color/red_light_3</color>
+    <color name="red_4">@color/red_light_4</color>
+    <color name="red_border">@color/red_light_border</color>
+
+    <color name="green_0">@color/green_light_0</color>
+    <color name="green_1">@color/green_light_1</color>
+    <color name="green_2">@color/green_light_2</color>
+    <color name="green_3">@color/green_light_3</color>
+    <color name="green_4">@color/green_light_4</color>
+    <color name="green_border">@color/green_light_border</color>
+
+    <color name="blue_0">@color/blue_light_0</color>
+    <color name="blue_1">@color/blue_light_1</color>
+    <color name="blue_2">@color/blue_light_2</color>
+    <color name="blue_3">@color/blue_light_3</color>
+    <color name="blue_4">@color/blue_light_4</color>
+    <color name="blue_border">@color/blue_light_border</color>
+
+    <color name="yellow_0">@color/yellow_light_0</color>
+    <color name="yellow_1">@color/yellow_light_1</color>
+    <color name="yellow_2">@color/yellow_light_2</color>
+    <color name="yellow_3">@color/yellow_light_3</color>
+    <color name="yellow_4">@color/yellow_light_4</color>
+    <color name="yellow_border">@color/yellow_light_border</color>
+
+    <color name="orange_0">@color/orange_light_0</color>
+    <color name="orange_1">@color/orange_light_1</color>
+    <color name="orange_2">@color/orange_light_2</color>
+    <color name="orange_3">@color/orange_light_3</color>
+    <color name="orange_4">@color/orange_light_4</color>
+    <color name="orange_border">@color/orange_light_border</color>
+
+    <color name="teal_0">@color/teal_light_0</color>
+    <color name="teal_1">@color/teal_light_1</color>
+    <color name="teal_2">@color/teal_light_2</color>
+    <color name="teal_3">@color/teal_light_3</color>
+    <color name="teal_4">@color/teal_light_4</color>
+    <color name="teal_border">@color/teal_light_border</color>
+
+    <color name="purple_0">@color/purple_light_0</color>
+    <color name="purple_1">@color/purple_light_1</color>
+    <color name="purple_2">@color/purple_light_2</color>
+    <color name="purple_3">@color/purple_light_3</color>
+    <color name="purple_4">@color/purple_light_4</color>
+    <color name="purple_border">@color/purple_light_border</color>
+
+    <!-- Neutral aliases (theme-agnostic for now) -->
+    <!-- Black neutrals -->
+    <color name="neutral_black_0">@color/black_0</color>
+    <color name="neutral_black_1">@color/black_1</color>
+    <color name="neutral_black_2">@color/black_2</color>
+    <color name="neutral_black_3">@color/black_3</color>
+    <color name="neutral_black_4">@color/black_4</color>
+    <color name="neutral_black_border">@color/black_border</color>
+
+    <!-- White neutrals -->
+    <color name="neutral_white_0">@color/white_0</color>
+    <color name="neutral_white_1">@color/white_1</color>
+    <color name="neutral_white_2">@color/white_2</color>
+    <color name="neutral_white_3">@color/white_3</color>
+    <color name="neutral_white_4">@color/white_4</color>
+    <color name="neutral_white_border">@color/white_border</color>
+
 </resources>

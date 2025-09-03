@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Neutral aliases (same mapping in night; ready for future divergence) -->
+    <!-- Black neutrals -->
+    <color name="neutral_black_0">@color/black_0</color>
+    <color name="neutral_black_1">@color/black_1</color>
+    <color name="neutral_black_2">@color/black_2</color>
+    <color name="neutral_black_3">@color/black_3</color>
+    <color name="neutral_black_4">@color/black_4</color>
+    <color name="neutral_black_border">@color/black_border</color>
+
+    <!-- White neutrals -->
+    <color name="neutral_white_0">@color/white_0</color>
+    <color name="neutral_white_1">@color/white_1</color>
+    <color name="neutral_white_2">@color/white_2</color>
+    <color name="neutral_white_3">@color/white_3</color>
+    <color name="neutral_white_4">@color/white_4</color>
+    <color name="neutral_white_border">@color/white_border</color>
+</resources>

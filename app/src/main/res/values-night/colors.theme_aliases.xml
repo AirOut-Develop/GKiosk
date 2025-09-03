@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Auto-resolving aliases (Night overrides). Match names from values/colors.xml -->
+    <color name="red_0">@color/red_dark_0</color>
+    <color name="red_1">@color/red_dark_1</color>
+    <color name="red_2">@color/red_dark_2</color>
+    <color name="red_3">@color/red_dark_3</color>
+    <color name="red_4">@color/red_dark_4</color>
+    <color name="red_border">@color/red_dark_border</color>
+
+    <color name="green_0">@color/green_dark_0</color>
+    <color name="green_1">@color/green_dark_1</color>
+    <color name="green_2">@color/green_dark_2</color>
+    <color name="green_3">@color/green_dark_3</color>
+    <color name="green_4">@color/green_dark_4</color>
+    <color name="green_border">@color/green_dark_border</color>
+
+    <color name="blue_0">@color/blue_dark_0</color>
+    <color name="blue_1">@color/blue_dark_1</color>
+    <color name="blue_2">@color/blue_dark_2</color>
+    <color name="blue_3">@color/blue_dark_3</color>
+    <color name="blue_4">@color/blue_dark_4</color>
+    <color name="blue_border">@color/blue_dark_border</color>
+
+    <color name="yellow_0">@color/yellow_dark_0</color>
+    <color name="yellow_1">@color/yellow_dark_1</color>
+    <color name="yellow_2">@color/yellow_dark_2</color>
+    <color name="yellow_3">@color/yellow_dark_3</color>
+    <color name="yellow_4">@color/yellow_dark_4</color>
+    <color name="yellow_border">@color/yellow_dark_border</color>
+
+    <color name="orange_0">@color/orange_dark_0</color>
+    <color name="orange_1">@color/orange_dark_1</color>
+    <color name="orange_2">@color/orange_dark_2</color>
+    <color name="orange_3">@color/orange_dark_3</color>
+    <color name="orange_4">@color/orange_dark_4</color>
+    <color name="orange_border">@color/orange_dark_border</color>
+
+    <color name="teal_0">@color/teal_dark_0</color>
+    <color name="teal_1">@color/teal_dark_1</color>
+    <color name="teal_2">@color/teal_dark_2</color>
+    <color name="teal_3">@color/teal_dark_3</color>
+    <color name="teal_4">@color/teal_dark_4</color>
+    <color name="teal_border">@color/teal_dark_border</color>
+
+    <color name="purple_0">@color/purple_dark_0</color>
+    <color name="purple_1">@color/purple_dark_1</color>
+    <color name="purple_2">@color/purple_dark_2</color>
+    <color name="purple_3">@color/purple_dark_3</color>
+    <color name="purple_4">@color/purple_dark_4</color>
+    <color name="purple_border">@color/purple_dark_border</color>
+</resources>

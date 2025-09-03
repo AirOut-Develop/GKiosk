@@ -43,3 +43,23 @@
 ## Security & Configuration
 - Do not commit secrets or keystores. Use Gradle properties/env vars.
 - SDK/NDK paths live in `local.properties` (untracked). Min SDK 27, target/compile SDK 33.
+
+## Agent-Specific Instructions
+- Environment: Use JDK 17 and Android Gradle Plugin 8.0.2 with `compileSdk 33`.
+- File edits: Prefer `apply_patch`-style minimal diffs; avoid unrelated changes.
+- Colors: Define palettes in `values/colors.xml`; expose theme-aware aliases via `values-night/` overrides. Use `primary_*` for brand.
+- Themes: Base on `Theme.MaterialComponents.DayNight.NoActionBar`; no title/action bar. Update `themes.xml` only via existing keys.
+- Activities: Place under `com.jwlryk.gkiosk`; register in `AndroidManifest.xml`. Launcher is `Init_Splash` → delayed → `Init_Category`.
+- Dependencies: Keep SDK 33–compatible libs (`appcompat 1.6.1`, `material 1.9.0`); align Kotlin via BOM if needed.
+- Git: Commit focused changes with Conventional Commits; keep `.gitattributes` line endings intact.
+
+## Using This Guide
+- Ask changes clearly, e.g.:
+  - "Add activity Foo and navigate from Bar after 2s."
+  - "Add color palette X and wire it to primary_* keys."
+  - "Update theme to use new colors and remove old references."
+- Verify locally:
+  - Build: `./gradlew assembleDebug` (Windows: `gradlew.bat assembleDebug`).
+  - Install: `./gradlew installDebug`.
+  - Tests/Lint: `./gradlew testDebugUnitTest lint`.
+- Toggle theme at runtime: set via `Global.setThemeMode(...)` → `Global.applyNightMode()` → `activity.recreate()`.

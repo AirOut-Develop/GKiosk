@@ -46,6 +46,16 @@
 - Main branch: `main` (protected); merge via PR only.
 - Tip: Use the helper `scripts/new-branch.sh dev|release <Title>` to scaffold names.
 
+## Tagging
+- Release tags: `RELEASE/YYMMDD_V0.01_Title` (same pattern as release branches).
+  - Example: `RELEASE/250903_V0.01_FirstDrop`
+- Create annotated tag:
+  - `git tag -a 'RELEASE/250903_V0.01_FirstDrop' -m 'Release 0.01 (2025-09-03): FirstDrop'`
+  - Push: `git push origin 'RELEASE/250903_V0.01_FirstDrop'`
+- Notes:
+  - Use annotated tags (-a) with a clear message (scope, changes, SHA).
+  - Pre-push hook validates RELEASE/* tag names; other tags are allowed.
+
 ## Security & Configuration
 - Do not commit secrets or keystores. Use Gradle properties/env vars.
 - SDK/NDK paths live in `local.properties` (untracked). Min SDK 27, target/compile SDK 33.

@@ -3,39 +3,53 @@ set -euo pipefail
 
 branch="$(git symbolic-ref --quiet --short HEAD || true)"
 
-# Allow pushing tags and HEAD-detached pushes (e.g., CI) without blocking.
-if [[ -z "${branch}" ]]; then
-  exit 0
+# Validate current branch name (when pushing a branch)
+if [[ -n "${branch}" ]]; then
+  case "${branch}" in
+    main)
+      : ;; # ok
+    DEVELOP/*)
+      if [[ ! "${branch}" =~ ^DEVELOP/[0-9]{6}_[0-9]{2}_[A-Za-z0-9_-]+$ ]]; then
+        echo "Push blocked: invalid DEVELOP branch name: ${branch}" >&2
+        echo "Expected: DEVELOP/YYMMDD_NN_Title (e.g., DEVELOP/250903_00_UIBaseLayout)" >&2
+        exit 1
+      fi
+      ;;
+    RELEASE/*)
+      if [[ ! "${branch}" =~ ^RELEASE/[0-9]{6}_V[0-9]+\.[0-9]{2}_[A-Za-z0-9_-]+$ ]]; then
+        echo "Push blocked: invalid RELEASE branch name: ${branch}" >&2
+        echo "Expected: RELEASE/YYMMDD_V0.01_Title (e.g., RELEASE/250903_V0.01_FirstDrop)" >&2
+        exit 1
+      fi
+      ;;
+    *)
+      echo "Push blocked: branch name does not follow convention: ${branch}" >&2
+      echo "Allowed: main | DEVELOP/YYMMDD_NN_Title | RELEASE/YYMMDD_V0.01_Title" >&2
+      exit 1
+      ;;
+  esac
 fi
 
-case "${branch}" in
-  main)
-    exit 0 ;;
-  DEVELOP/*)
-    if [[ "${branch}" =~ ^DEVELOP/[0-9]{6}_[0-9]{2}_[A-Za-z0-9_-]+$ ]]; then
-      exit 0
+# Validate tags being pushed (read refs from stdin)
+invalid_tags=()
+while read -r local_ref local_sha remote_ref remote_sha; do
+  [[ -z "${local_ref:-}" ]] && continue
+  if [[ "${local_ref}" == refs/tags/* ]]; then
+    tag_name="${local_ref#refs/tags/}"
+    # Enforce only for RELEASE/* tags; allow others to pass
+    if [[ "${tag_name}" == RELEASE/* ]]; then
+      if [[ ! "${tag_name}" =~ ^RELEASE/[0-9]{6}_V[0-9]+\.[0-9]{2}_[A-Za-z0-9_-]+$ ]]; then
+        invalid_tags+=("${tag_name}")
+      fi
     fi
-    ;;
-  RELEASE/*)
-    if [[ "${branch}" =~ ^RELEASE/[0-9]{6}_V[0-9]+\.[0-9]{2}_[A-Za-z0-9_-]+$ ]]; then
-      exit 0
-    fi
-    ;;
-esac
+  fi
+done
 
-cat <<EOF
-Push blocked: branch name does not follow the repository convention.
+if (( ${#invalid_tags[@]} > 0 )); then
+  echo "Push blocked: invalid tag name(s):" >&2
+  for t in "${invalid_tags[@]}"; do echo "  - $t" >&2; done
+  echo "Expected tag pattern: RELEASE/YYMMDD_V0.01_Title (e.g., RELEASE/250903_V0.01_FirstDrop)" >&2
+  exit 1
+fi
 
-Expected patterns:
-  - main
-  - DEVELOP/YYMMDD_NN_Title        (e.g., DEVELOP/250903_00_UIBaseLayout)
-  - RELEASE/YYMMDD_V0.01_Title     (e.g., RELEASE/250903_V0.01_FirstDrop)
-
-Your branch:
-  ${branch}
-
-Fix by renaming:
-  git branch -m <NewName>
-EOF
-exit 1
-
+exit 0

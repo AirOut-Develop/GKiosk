@@ -15,6 +15,7 @@ public class Init_Splash extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_init_splash);
+        UiUtil.enableImmersiveMode(this);
 
         long delayMs = getIntent().getLongExtra("delay_ms", DEFAULT_DELAY_MS);
 
@@ -24,5 +25,12 @@ public class Init_Splash extends AppCompatActivity {
             finish();
         }, delayMs);
     }
-}
 
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            UiUtil.enableImmersiveMode(this);
+        }
+    }
+}

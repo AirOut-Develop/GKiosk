@@ -4,27 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/text_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Init_Splash"
-        android:textSize="24sp"
-        android:textStyle="bold"
+    <ImageView
+        android:id="@+id/image_splash"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/init_splash_bg"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/text_sub"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="잠시 후 카테고리로 이동합니다..."
-        app:layout_constraintTop_toBottomOf="@id/text_title"
-        app:layout_constraintStart_toStartOf="@id/text_title"
-        app:layout_constraintEnd_toEndOf="@id/text_title"
-        android:layout_marginTop="8dp" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-

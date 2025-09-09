@@ -1,20 +1,499 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="@dimen/space_l"
+    tools:context=".Init_Category"
+    tools:theme="@style/Theme.GKiosk">
 
-    <TextView
-        android:id="@+id/text_category"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Init_Category"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical"
+        android:clipToPadding="false">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Page Title -->
+        <TextView
+            android:id="@+id/view_page_title"
+            style="@style/TextAppearance.GKiosk.Headline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Components Preview"
+            android:paddingBottom="@dimen/space_m" />
 
+        <!-- Section: Theme Toggle -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/view_section_theme"
+            style="@style/Widget.GKiosk.Card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space_m">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="@dimen/space_m">
+
+                <TextView
+                    style="@style/TextAppearance.GKiosk.SectionTitle"
+                    android:text="Theme"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/view_theme_toggle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dark"
+                    android:textOn="Dark"
+                    android:textOff="Light"
+                    app:useMaterialThemeColors="true" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Section: Text -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/view_section_text"
+            style="@style/Widget.GKiosk.Card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space_m">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/space_m">
+
+                <TextView
+                    style="@style/TextAppearance.GKiosk.SectionTitle"
+                    android:text="Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    style="@style/TextAppearance.GKiosk.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_s"
+                    android:text="Title / 타이틀" />
+
+                <TextView
+                    style="@style/TextAppearance.GKiosk.SubTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SubTitle / 서브타이틀" />
+
+                <TextView
+                    style="@style/TextAppearance.GKiosk.Body"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Body / 바디 텍스트 – 설명 문구 예시입니다." />
+
+                <TextView
+                    style="@style/TextAppearance.GKiosk.Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Caption / 캡션" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Section: Buttons -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/view_section_buttons"
+            style="@style/Widget.GKiosk.Card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space_m">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/space_m">
+
+                <TextView
+                    style="@style/TextAppearance.GKiosk.SectionTitle"
+                    android:text="Buttons"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_s"
+                    android:orientation="horizontal">
+
+                    <!-- Left column: existing 3 buttons -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/view_btn_primary"
+                            style="@style/Widget.GKiosk.PrimaryButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Primary" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/view_btn_outlined"
+                            style="@style/Widget.GKiosk.OutlinedButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_s"
+                            android:text="Outlined" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/view_btn_disabled"
+                            style="@style/Widget.GKiosk.PrimaryButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_s"
+                            android:enabled="false"
+                            android:text="Disabled" />
+                    </LinearLayout>
+
+                    <!-- Right column: extra buttons -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:paddingStart="@dimen/space_s"
+                        android:clipChildren="false">
+
+                        <!-- Row 1: Add / Remove (outlined circular) -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <ImageButton
+                                android:id="@+id/btn_add"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:background="@drawable/bg_circle_fill_black2"
+                                android:foreground="?attr/selectableItemBackgroundBorderless"
+                                android:padding="12dp"
+                                android:scaleType="center"
+                                android:src="@drawable/ic_add"
+                                app:tint="@android:color/white" />
+
+                            <ImageButton
+                                android:id="@+id/btn_remove"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:layout_marginStart="@dimen/space_s"
+                                android:background="@drawable/bg_circle_fill_black2"
+                                android:foreground="?attr/selectableItemBackgroundBorderless"
+                                android:padding="12dp"
+                                android:scaleType="center"
+                                android:src="@drawable/ic_remove"
+                                app:tint="@android:color/white" />
+                        </LinearLayout>
+
+                        <!-- Row 2: Add Shopping Cart (filled) / Cancel (outlined) -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_s"
+                            android:orientation="horizontal">
+
+                            <ImageButton
+                                android:id="@+id/btn_add_cart"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:background="@drawable/bg_circle_fill_black2"
+                                android:foreground="?attr/selectableItemBackgroundBorderless"
+                                android:padding="12dp"
+                                android:scaleType="center"
+                                android:src="@drawable/ic_add_shopping_cart"
+                                app:tint="@android:color/white" />
+
+                            <ImageButton
+                                android:id="@+id/btn_cancel"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:layout_marginStart="@dimen/space_s"
+                                android:background="@drawable/bg_circle_fill_red3"
+                                android:foreground="?attr/selectableItemBackgroundBorderless"
+                                android:padding="12dp"
+                                android:scaleType="center"
+                                android:src="@drawable/ic_cancel"
+                                app:tint="@android:color/white" />
+                        </LinearLayout>
+
+                        <!-- Row 3: Delete Forever / Remove Shopping Cart (outlined red) -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_s"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btn_cart_remove"
+                                style="@style/Widget.GKiosk.OutlinedButton.Red"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/space_s"
+                                android:text="장바구니 비우기"
+                                app:icon="@drawable/ic_delete_forever"
+                                android:textFontWeight="700"
+                                app:iconGravity="textStart" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Section: Toggles -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/view_section_toggles"
+            style="@style/Widget.GKiosk.Card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space_m">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/space_m">
+
+                <TextView
+                    style="@style/TextAppearance.GKiosk.SectionTitle"
+                    android:text="Toggles"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/view_toggle_switch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_s"
+                    app:useMaterialThemeColors="true"
+                    android:text="스위치 (SwitchMaterial)" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/view_toggle_checkbox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="체크박스"
+                    app:useMaterialThemeColors="true" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/view_radio_a"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="옵션 A"
+                        app:useMaterialThemeColors="true" />
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/view_radio_b"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/space_m"
+                        android:text="옵션 B"
+                        app:useMaterialThemeColors="true" />
+                </RadioGroup>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Section: Amount -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/view_section_amount"
+            style="@style/Widget.GKiosk.Card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space_m">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/space_m">
+
+                <TextView
+                    style="@style/TextAppearance.GKiosk.SectionTitle"
+                    android:text="Amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/view_amount_primary"
+                    style="@style/TextAppearance.GKiosk.Amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_s"
+                    android:text="₩ 12,345" />
+
+                <TextView
+                    android:id="@+id/view_amount_subtle"
+                    style="@style/TextAppearance.GKiosk.SubTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black_3"
+                    android:text="부가세 포함 / VAT included" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Section: Card View -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/view_section_card"
+            style="@style/Widget.GKiosk.Card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/space_m">
+
+                <TextView
+                    style="@style/TextAppearance.GKiosk.SectionTitle"
+                    android:text="Card"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    style="@style/TextAppearance.GKiosk.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_s"
+                    android:text="섹션 카드 타이틀" />
+
+                <TextView
+                    style="@style/TextAppearance.GKiosk.Body"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="카드 컨텐츠 예시입니다. 관리 UI에서 사용될 기본 카드 레이아웃 샘플." />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Section: Cards with Images (various ratios) -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/view_section_media_cards"
+            style="@style/Widget.GKiosk.Card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_m">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/space_m">
+
+                <TextView
+                    style="@style/TextAppearance.GKiosk.SectionTitle"
+                    android:text="Cards with Images"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_m"
+                    android:clipChildren="false">
+
+                    <androidx.gridlayout.widget.GridLayout
+                        android:id="@+id/grid_media_cards"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:alignmentMode="alignMargins"
+                        app:columnCount="4"
+                        app:rowOrderPreserved="false"
+                        app:useDefaultMargins="true">
+
+                        <!-- 2 rows x 4 columns using include of item_product_card -->
+                        <include
+                            android:id="@+id/card_inc_1"
+                            layout="@layout/item_product_card"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_columnWeight="1" />
+
+                        <include
+                            android:id="@+id/card_inc_2"
+                            layout="@layout/item_product_card"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_columnWeight="1" />
+
+                        <include
+                            android:id="@+id/card_inc_3"
+                            layout="@layout/item_product_card"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_columnWeight="1" />
+
+                        <include
+                            android:id="@+id/card_inc_4"
+                            layout="@layout/item_product_card"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_columnWeight="1" />
+
+                        <include
+                            android:id="@+id/card_inc_5"
+                            layout="@layout/item_product_card"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_columnWeight="1" />
+
+                        <include
+                            android:id="@+id/card_inc_6"
+                            layout="@layout/item_product_card"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_columnWeight="1" />
+
+                        <include
+                            android:id="@+id/card_inc_7"
+                            layout="@layout/item_product_card"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_columnWeight="1" />
+
+                        <include
+                            android:id="@+id/card_inc_8"
+                            layout="@layout/item_product_card"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_columnWeight="1" />
+
+                    </androidx.gridlayout.widget.GridLayout>
+
+                    <LinearLayout
+                        android:layout_width="220dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:clipChildren="false"
+                        android:paddingStart="@dimen/space_0">
+
+                        <include layout="@layout/item_product_card_qty" />
+                        <include layout="@layout/item_product_card_qty" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

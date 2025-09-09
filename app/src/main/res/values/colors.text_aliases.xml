@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Text aliases for Light theme -->
+    <color name="text_primary">@color/neutral_black_0</color>
+    <color name="text_secondary">@color/neutral_black_2</color>
+    <color name="text_caption">@color/neutral_black_3</color>
+</resources>
+

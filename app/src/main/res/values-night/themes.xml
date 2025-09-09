@@ -8,12 +8,23 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary_main</item>
         <item name="colorPrimaryVariant">@color/primary_darker</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Background/Surface for true dark -->
+        <item name="android:windowBackground">@color/black_0</item>
+        <item name="android:colorBackground">@color/black_0</item>
+        <item name="colorOnBackground">@color/white</item>
+        <item name="colorSurface">@color/black_1</item>
+        <item name="colorOnSurface">@color/white</item>
+        <!-- Controls (Switch/Checkbox/Radio) active color -->
+        <item name="colorControlActivated">@color/primary_main</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_1</item>
         <item name="colorSecondaryVariant">@color/teal_0</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Global font family -->
+        <item name="android:fontFamily">@font/pretendard</item>
+        <item name="fontFamily">@font/pretendard</item>
     </style>
 </resources>

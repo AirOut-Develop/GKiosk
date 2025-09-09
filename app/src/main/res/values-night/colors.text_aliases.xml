@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Text aliases for Night theme -->
+    <color name="text_primary">@color/neutral_white_4</color>
+    <color name="text_secondary">@color/neutral_white_2</color>
+    <color name="text_caption">@color/neutral_white_1</color>
+</resources>
+

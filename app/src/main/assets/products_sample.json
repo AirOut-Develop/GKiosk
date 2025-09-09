@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "brand": "BRAND A",
+    "title": "프리미엄 상품 A",
+    "price": 12345,
+    "tags": [
+      "인기",
+      "추천"
+    ],
+    "image": "grad_01",
+    "ratio": "1:1.3"
+  },
+  {
+    "id": 2,
+    "brand": "BRAND B",
+    "title": "프리미엄 상품 B",
+    "price": 45000,
+    "tags": [
+      "베스트"
+    ],
+    "image": "grad_02",
+    "ratio": "1:1.3"
+  },
+  {
+    "id": 3,
+    "brand": "BRAND C",
+    "title": "프리미엄 상품 C",
+    "price": 89000,
+    "tags": [
+      "신상"
+    ],
+    "image": "grad_03",
+    "ratio": "1:1.3"
+  },
+  {
+    "id": 4,
+    "brand": "BRAND D",
+    "title": "프리미엄 상품 D",
+    "price": 129000,
+    "tags": [
+      "한정"
+    ],
+    "image": "grad_04",
+    "ratio": "1:1.3"
+  },
+  {
+    "id": 5,
+    "brand": "BRAND E",
+    "title": "프리미엄 상품 E",
+    "price": 59000,
+    "tags": [
+      "스테디"
+    ],
+    "image": "grad_05",
+    "ratio": "1:1.3"
+  },
+  {
+    "id": 6,
+    "brand": "BRAND F",
+    "title": "프리미엄 상품 F",
+    "price": 34900,
+    "tags": [
+      "가성비"
+    ],
+    "image": "grad_06",
+    "ratio": "1:1.3"
+  },
+  {
+    "id": 7,
+    "brand": "BRAND G",
+    "title": "프리미엄 상품 G",
+    "price": 77000,
+    "tags": [
+      "한정",
+      "추천"
+    ],
+    "image": "grad_07",
+    "ratio": "1:1.3"
+  },
+  {
+    "id": 8,
+    "brand": "BRAND H",
+    "title": "프리미엄 상품 H",
+    "price": 99900,
+    "tags": [
+      "인기"
+    ],
+    "image": "grad_08",
+    "ratio": "1:1.3"
+  }
+]

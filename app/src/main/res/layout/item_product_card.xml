@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.GKiosk.Card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/space_0"
+    tools:layout_width="180dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/view_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/grad_04"
+            tools:src="@drawable/grad_04"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintDimensionRatio="1:1.1"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceGKioskCardTopOnly" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/space_m"
+            android:paddingVertical="@dimen/space_s"
+            app:layout_constraintTop_toBottomOf="@id/view_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:id="@+id/view_brand"
+                style="@style/TextAppearance.GKiosk.Brand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BRAND" />
+
+            <TextView
+                style="@style/TextAppearance.GKiosk.Title"
+                android:id="@+id/view_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="상품명 예시"
+                android:maxLines="1"
+                android:ellipsize="end"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="12sp"
+                app:autoSizeMaxTextSize="18sp"
+                app:autoSizeStepGranularity="1sp" />
+
+            <TextView
+                android:id="@+id/view_price"
+                style="@style/TextAppearance.GKiosk.Amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="₩ 12,345" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/view_tags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_s"
+                app:singleLine="true">
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.GKiosk.TagChip"
+                    android:text="태그" />
+            </com.google.android.material.chip.ChipGroup>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

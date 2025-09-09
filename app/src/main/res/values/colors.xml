@@ -2,10 +2,10 @@
 <resources>
 
     <!-- Primary brand colors (hex-defined) -->
-    <color name="primary_main">#3E7BFA</color>
-    <color name="primary_darker">#3568D4</color>
-    <color name="primary_lighter">#6698FA</color>
-    <color name="primary_subtle">#CCDDFF</color>
+    <color name="primary_main">#66cdaa</color>
+    <color name="primary_darker">#59c095</color>
+    <color name="primary_lighter">#83dcb7</color>
+    <color name="primary_subtle">#3E7BFA</color>
 
     
 

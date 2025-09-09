@@ -36,6 +36,10 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    // Removed GridLayout; using ConstraintLayout Flow helper instead
+    // material declared once above
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
+    // RecyclerView 제거 (Flow 기반 고정 그리드 사용)
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'

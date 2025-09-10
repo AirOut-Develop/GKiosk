@@ -2,5 +2,6 @@
 <resources>
     <!-- UI aliases for Light theme -->
     <color name="card_stroke">@color/white_border</color>
+    <!-- Icon tint for small controls (e.g., minus) -->
+    <color name="control_icon_tint">@color/black_2</color>
 </resources>
-

@@ -487,8 +487,12 @@
                         android:clipChildren="false"
                         android:paddingStart="@dimen/space_0">
 
-                        <include layout="@layout/item_product_card_qty" />
-                        <include layout="@layout/item_product_card_qty" />
+                        <include
+                            android:id="@+id/cart_inc_1"
+                            layout="@layout/item_product_card_qty" />
+                        <include
+                            android:id="@+id/cart_inc_2"
+                            layout="@layout/item_product_card_qty" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

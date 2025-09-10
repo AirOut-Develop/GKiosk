@@ -58,6 +58,21 @@ public class Init_Category extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        // 장바구니(수량 카드) 영역: products_cart.json 바인딩
+        try {
+            JSONArray cart = new JSONArray(loadAssetText("products_cart.json"));
+            int[] cartIds = new int[]{ R.id.cart_inc_1, R.id.cart_inc_2 };
+            int c = Math.min(cartIds.length, cart.length());
+            for (int i = 0; i < c; i++) {
+                View card = findViewById(cartIds[i]);
+                if (card == null) continue;
+                JSONObject obj = cart.getJSONObject(i);
+                bindProductToCard(card, obj);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void bindProductToCard(View cardRoot, JSONObject obj) throws JSONException {

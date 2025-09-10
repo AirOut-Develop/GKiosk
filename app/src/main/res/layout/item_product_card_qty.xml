@@ -92,7 +92,7 @@
                             android:padding="8dp"
                             android:scaleType="center"
                             android:src="@drawable/ic_remove"
-                            app:tint="@color/black_2" />
+                            app:tint="@color/control_icon_tint" />
 
                         <TextView
                             android:id="@+id/view_qty"

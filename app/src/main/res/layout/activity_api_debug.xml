@@ -140,12 +140,21 @@
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
                 <TextView
+                    android:id="@+id/tv_request_json"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@color/white_2"
+                    android:padding="8dp"
+                    android:textSize="12sp"
+                    android:scrollbars="vertical"/>
+                <TextView
                     android:id="@+id/tv_api_json"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:background="@color/white_2"
                     android:padding="8dp"
                     android:textSize="12sp"
+                    android:layout_marginTop="8dp"
                     android:scrollbars="vertical"/>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>

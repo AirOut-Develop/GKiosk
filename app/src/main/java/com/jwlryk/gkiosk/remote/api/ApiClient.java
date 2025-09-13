@@ -25,7 +25,7 @@ public final class ApiClient {
                     if (!baseUrl.endsWith("/")) baseUrl = baseUrl + "/"; // Retrofit requires trailing slash for baseUrl
 
                     HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-                    logging.setLevel(HttpLoggingInterceptor.Level.BASIC);
+                    logging.setLevel(HttpLoggingInterceptor.Level.BODY);
                     OkHttpClient client = new OkHttpClient.Builder()
                             .addInterceptor(logging)
                             .build();

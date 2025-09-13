@@ -8,7 +8,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AlertDialog;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -35,6 +37,7 @@ public class ApiDebugActivity extends AppCompatActivity {
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     private TextView tvSingletonState;
+    private TextView tvRequestJson;
     private TextView tvApiJson;
     private TextView tvAssignStatus;
     private EditText etBaseUrl;
@@ -48,13 +51,17 @@ public class ApiDebugActivity extends AppCompatActivity {
         setContentView(R.layout.activity_api_debug);
 
         tvSingletonState = findViewById(R.id.tv_singleton_state);
+        tvRequestJson = findViewById(R.id.tv_request_json);
         tvApiJson = findViewById(R.id.tv_api_json);
         tvAssignStatus = findViewById(R.id.tv_assign_status);
         etBaseUrl = findViewById(R.id.et_base_url);
         etStoreCode = findViewById(R.id.et_store_code);
         etDeviceCode = findViewById(R.id.et_device_code);
+        tvRequestJson.setMovementMethod(new ScrollingMovementMethod());
         tvApiJson.setMovementMethod(new ScrollingMovementMethod());
 
+        // Load from SharedPreferences, then prefill inputs from KioskInfo
+        com.jwlryk.gkiosk.data.KioskPrefs.loadIntoSingleton(this);
         // Prefill from KioskInfo
         KioskInfo ki = KioskInfo.getInstance();
         if (ki.getApiBaseUrl() != null) etBaseUrl.setText(ki.getApiBaseUrl());
@@ -113,8 +120,19 @@ public class ApiDebugActivity extends AppCompatActivity {
     private void callStore() {
         applyConfigToSingleton();
         String code = etStoreCode.getText().toString().trim();
+        if (code.isEmpty()) {
+            String fromSingleton = KioskInfo.getInstance().getStoreCode();
+            if (fromSingleton != null && !fromSingleton.isEmpty()) {
+                code = fromSingleton;
+                etStoreCode.setText(code);
+            }
+        }
+        if (code.isEmpty()) {
+            promptFetchByCompanyThen(this::callStore);
+            return;
+        }
         ApiService api = ApiClient.get();
-        tvApiJson.setText("Loading /store/" + code + " ...");
+        showRequest("GET", "/store/" + code, null);
         api.getStoreByCode(code).enqueue(new Callback<ApiResponse<Store>>() {
             @Override public void onResponse(Call<ApiResponse<Store>> call, Response<ApiResponse<Store>> response) {
                 handleApiResult("Store", response);
@@ -130,8 +148,19 @@ public class ApiDebugActivity extends AppCompatActivity {
     private void callDevices() {
         applyConfigToSingleton();
         String code = etStoreCode.getText().toString().trim();
+        if (code.isEmpty()) {
+            String fromSingleton = KioskInfo.getInstance().getStoreCode();
+            if (fromSingleton != null && !fromSingleton.isEmpty()) {
+                code = fromSingleton;
+                etStoreCode.setText(code);
+            }
+        }
+        if (code.isEmpty()) {
+            promptFetchByCompanyThen(this::callDevices);
+            return;
+        }
         ApiService api = ApiClient.get();
-        tvApiJson.setText("Loading /store/" + code + "/devices ...");
+        showRequest("GET", "/store/" + code + "/devices", null);
         api.getDevicesByStoreCode(code).enqueue(new Callback<ApiResponse<List<Device>>>() {
             @Override public void onResponse(Call<ApiResponse<List<Device>>> call, Response<ApiResponse<List<Device>>> response) {
                 handleApiResult("Devices", response);
@@ -148,7 +177,7 @@ public class ApiDebugActivity extends AppCompatActivity {
             return;
         }
         ApiService api = ApiClient.get();
-        tvApiJson.setText("Loading /store/company/" + companyNo + " ...");
+        showRequest("GET", "/store/company/" + companyNo, null);
         api.getStoreByCompanyNumber(companyNo).enqueue(new Callback<ApiResponse<Store>>() {
             @Override public void onResponse(Call<ApiResponse<Store>> call, Response<ApiResponse<Store>> response) {
                 handleApiResult("Store(company)", response);
@@ -166,73 +195,41 @@ public class ApiDebugActivity extends AppCompatActivity {
     private void runChainFromCompany() {
         applyConfigToSingleton();
         String companyNo = etCompanyNumber.getText().toString().trim();
-        if (companyNo.isEmpty()) {
-            tvAssignStatus.setText("Chain: FAILED - 사업자번호가 비어있음");
-            return;
-        }
-        ApiService api = ApiClient.get();
         tvAssignStatus.setText("Chain: /store/company → /store/{code}/devices → /device/{DeviceCode}/products");
-        tvApiJson.setText("Loading /store/company/" + companyNo + " ...");
-        api.getStoreByCompanyNumber(companyNo).enqueue(new Callback<ApiResponse<Store>>() {
-            @Override public void onResponse(Call<ApiResponse<Store>> call, Response<ApiResponse<Store>> respStore) {
-                handleApiResult("Store(company)", respStore);
-                if (!respStore.isSuccessful() || respStore.body() == null || respStore.body().getPayload() == null) {
-                    tvAssignStatus.setText("Chain: FAILED at store(company)");
-                    return;
-                }
-                Store s = respStore.body().getPayload();
-                assignStoreToSingleton(s);
-                if (s.code != null) etStoreCode.setText(s.code);
-
-                // step 2: devices
-                tvApiJson.setText("Loading /store/" + s.code + "/devices ...");
-                ApiClient.get().getDevicesByStoreCode(s.code).enqueue(new Callback<ApiResponse<List<Device>>>() {
-                    @Override public void onResponse(Call<ApiResponse<List<Device>>> call, Response<ApiResponse<List<Device>>> respDev) {
-                        handleApiResult("Devices", respDev);
-                        if (!respDev.isSuccessful() || respDev.body() == null || respDev.body().getPayload() == null) {
-                            tvAssignStatus.setText("Chain: FAILED at devices");
-                            return;
-                        }
-                        List<Device> devs = respDev.body().getPayload();
-                        // pick first device code
-                        String deviceCode = null;
-                        if (devs != null) {
-                            for (Device d : devs) { if (d != null && d.code != null && !d.code.isEmpty()) { deviceCode = d.code; break; } }
-                        }
-                        if (deviceCode == null) {
-                            tvAssignStatus.setText("Chain: FAILED - device code 없음");
-                            return;
-                        }
-                        etDeviceCode.setText(deviceCode);
-                        KioskInfo.getInstance().setKioskCode(deviceCode);
-
-                        // step 3: products
-                        tvApiJson.setText("Loading /device/" + deviceCode + "/products ...");
-                        ApiClient.get().getProductsByDeviceCode(deviceCode).enqueue(new Callback<ApiResponse<List<Product>>>() {
-                            @Override public void onResponse(Call<ApiResponse<List<Product>>> call, Response<ApiResponse<List<Product>>> respProd) {
-                                handleApiResult("Products", respProd);
-                                if (!respProd.isSuccessful() || respProd.body() == null || respProd.body().getPayload() == null) {
-                                    tvAssignStatus.setText("Chain: FAILED at products");
-                                    return;
-                                }
-                                assignProductsToSingleton(respProd.body().getPayload());
-                                tvAssignStatus.setText("Chain: OK - 모든 단계 완료");
-                            }
-                            @Override public void onFailure(Call<ApiResponse<List<Product>>> call, Throwable t) { setError("Products(chain)", t); }
-                        });
-                    }
-                    @Override public void onFailure(Call<ApiResponse<List<Device>>> call, Throwable t) { setError("Devices(chain)", t); }
-                });
+        showRequest("GET", "/store/company/" + companyNo, null);
+        new com.jwlryk.gkiosk.remote.BootstrapChain().runByCompanyNumber(companyNo, new com.jwlryk.gkiosk.remote.BootstrapChain.Listener() {
+            @Override public void onProgress(@NonNull String step) {
+                tvAssignStatus.setText("Chain: 진행 중 - " + step);
             }
-            @Override public void onFailure(Call<ApiResponse<Store>> call, Throwable t) { setError("Store(company)", t); }
+            @Override public void onSuccess() {
+                tvAssignStatus.setText("Chain: OK - 모든 단계 완료");
+                if (KioskInfo.getInstance().getStoreCode() != null) etStoreCode.setText(KioskInfo.getInstance().getStoreCode());
+                if (KioskInfo.getInstance().getKioskCode() != null) etDeviceCode.setText(KioskInfo.getInstance().getKioskCode());
+                com.jwlryk.gkiosk.data.KioskPrefs.saveAll(ApiDebugActivity.this, KioskInfo.getInstance());
+                renderSingletonState();
+            }
+            @Override public void onError(@NonNull String step, @NonNull String message, @Nullable Throwable t) {
+                tvAssignStatus.setText("Chain: FAILED at " + step + " - " + message);
+            }
         });
     }
 
     private void callProducts() {
         applyConfigToSingleton();
         String deviceCode = etDeviceCode.getText().toString().trim();
+        if (deviceCode.isEmpty()) {
+            String fromSingleton = KioskInfo.getInstance().getKioskCode();
+            if (fromSingleton != null && !fromSingleton.isEmpty()) {
+                deviceCode = fromSingleton;
+                etDeviceCode.setText(deviceCode);
+            }
+        }
+        if (deviceCode.isEmpty()) {
+            promptFetchByCompanyThen(this::callProducts);
+            return;
+        }
         ApiService api = ApiClient.get();
-        tvApiJson.setText("Loading /device/" + deviceCode + "/products ...");
+        showRequest("GET", "/device/" + deviceCode + "/products", null);
         api.getProductsByDeviceCode(deviceCode).enqueue(new Callback<ApiResponse<List<Product>>>() {
             @Override public void onResponse(Call<ApiResponse<List<Product>>> call, Response<ApiResponse<List<Product>>> response) {
                 handleApiResult("Products", response);
@@ -245,16 +242,26 @@ public class ApiDebugActivity extends AppCompatActivity {
     }
 
     private void handleApiResult(String tag, Response<?> response) {
-        String json;
-        try {
-            Object body = response.body();
-            if (body != null) json = gson.toJson(body);
-            else json = "HTTP " + response.code() + " (empty body)";
-        } catch (Exception e) {
-            json = "parse error: " + e.getMessage();
+        String out;
+        if (response.isSuccessful()) {
+            try {
+                Object body = response.body();
+                out = (body != null) ? gson.toJson(body) : ("HTTP " + response.code() + " (empty body)");
+                tvAssignStatus.setText(tag + ": OK");
+            } catch (Exception e) {
+                out = "parse error: " + e.getMessage();
+                tvAssignStatus.setText(tag + ": PARSE ERROR");
+            }
+        } else {
+            try {
+                String err = response.errorBody() != null ? response.errorBody().string() : "";
+                out = "HTTP " + response.code() + "\n" + err;
+            } catch (Exception e) {
+                out = "HTTP " + response.code() + " (error body read failed: " + e.getMessage() + ")";
+            }
+            tvAssignStatus.setText(tag + ": FAILED HTTP " + response.code());
         }
-        tvApiJson.setText(json);
-        tvAssignStatus.setText(tag + ": OK");
+        tvApiJson.setText(out);
         renderSingletonState();
     }
 
@@ -271,11 +278,44 @@ public class ApiDebugActivity extends AppCompatActivity {
                     .setStoreCompanyNumber(s.companyNumber)
                     .setDeviceCardCompanyType(s.cardVanType)
                     .setDeviceCardTID(s.cardVanCATID);
+            if (s.code != null) etStoreCode.setText(s.code);
+            if (s.companyNumber != null && etCompanyNumber != null) etCompanyNumber.setText(s.companyNumber);
+            com.jwlryk.gkiosk.data.KioskPrefs.saveAll(this, KioskInfo.getInstance());
             tvAssignStatus.setText("Store assigned to KioskInfo");
         } catch (Exception e) {
             tvAssignStatus.setText("Store assign FAILED: " + e.getMessage());
         }
         renderSingletonState();
+    }
+
+    private void promptFetchByCompanyThen(@NonNull Runnable afterSuccess) {
+        String companyNo = etCompanyNumber != null ? etCompanyNumber.getText().toString().trim() : "";
+        if (companyNo.isEmpty()) {
+            tvAssignStatus.setText("체인 실행 불가: 사업자번호가 비어있음");
+            return;
+        }
+        new AlertDialog.Builder(this)
+                .setTitle("설정 필요")
+                .setMessage("사업자번호(" + companyNo + ")로 매장/디바이스/상품 정보를 불러오시겠습니까?")
+                .setNegativeButton("취소", null)
+                .setPositiveButton("불러오기", (d, w) -> {
+                    tvAssignStatus.setText("Chain: /store/company → /store/{code}/devices → /device/{DeviceCode}/products");
+                    showRequest("GET", "/store/company/" + companyNo, null);
+                    new com.jwlryk.gkiosk.remote.BootstrapChain().runByCompanyNumber(companyNo, new com.jwlryk.gkiosk.remote.BootstrapChain.Listener() {
+                        @Override public void onProgress(@NonNull String step) { tvAssignStatus.setText("Chain: 진행 중 - " + step); }
+                        @Override public void onSuccess() {
+                            if (KioskInfo.getInstance().getStoreCode() != null) etStoreCode.setText(KioskInfo.getInstance().getStoreCode());
+                            if (KioskInfo.getInstance().getKioskCode() != null) etDeviceCode.setText(KioskInfo.getInstance().getKioskCode());
+                            com.jwlryk.gkiosk.data.KioskPrefs.saveAll(ApiDebugActivity.this, KioskInfo.getInstance());
+                            renderSingletonState();
+                            afterSuccess.run();
+                        }
+                        @Override public void onError(@NonNull String step, @NonNull String message, @Nullable Throwable t) {
+                            tvAssignStatus.setText("Chain: FAILED at " + step + " - " + message);
+                        }
+                    });
+                })
+                .show();
     }
 
     private void assignProductsToSingleton(List<Product> list) {
@@ -304,6 +344,20 @@ public class ApiDebugActivity extends AppCompatActivity {
         renderSingletonState();
     }
 
+    private void showRequest(String method, String path, @Nullable String bodyJson) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Method: ").append(method).append('\n')
+          .append("BaseUrl: ").append(n(KioskInfo.getInstance().getApiBaseUrl())).append('\n')
+          .append("Path: ").append(path).append('\n')
+          .append("StoreCode: ").append(n(KioskInfo.getInstance().getStoreCode())).append('\n')
+          .append("DeviceCode: ").append(n(KioskInfo.getInstance().getKioskCode())).append('\n');
+        if (bodyJson != null && !bodyJson.isEmpty()) {
+            sb.append("Body:\n").append(bodyJson).append('\n');
+        }
+        if (tvRequestJson != null) tvRequestJson.setText(sb.toString());
+        if (tvApiJson != null) tvApiJson.setText("");
+    }
+
     private void applyConfigToSingleton() {
         String baseUrl = etBaseUrl.getText().toString().trim();
         String storeCode = etStoreCode.getText().toString().trim();
@@ -312,6 +366,7 @@ public class ApiDebugActivity extends AppCompatActivity {
                 .setApiBaseUrl(baseUrl.isEmpty() ? null : baseUrl)
                 .setStoreCode(storeCode)
                 .setKioskCode(deviceCode);
+        com.jwlryk.gkiosk.data.KioskPrefs.saveBasics(this, baseUrl.isEmpty() ? null : baseUrl, storeCode, deviceCode);
         renderSingletonState();
     }
 

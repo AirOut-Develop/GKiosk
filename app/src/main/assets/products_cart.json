@@ -4,18 +4,19 @@
     "brand": "CART",
     "title": "장바구니 상품 1",
     "price": 12900,
+    "qty": 2,
     "tags": ["세일"],
     "image": "grad_02",
-    "ratio": "1:1.3"
+    "ratio": "1:1.1"
   },
   {
     "id": 102,
     "brand": "CART",
     "title": "장바구니 상품 2",
     "price": 35900,
+    "qty": 1,
     "tags": ["인기"],
     "image": "grad_03",
-    "ratio": "1:1.3"
+    "ratio": "1:1.1"
   }
 ]
-

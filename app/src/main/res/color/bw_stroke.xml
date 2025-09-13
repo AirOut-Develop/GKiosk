@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Stroke follows new rule: light=white_2, night=black_2 via alias -->
+    <item android:color="@color/bw_stroke_base"/>
+    
+</selector>

@@ -4,4 +4,10 @@
     <color name="card_stroke">@color/white_border</color>
     <!-- Icon tint for small controls (e.g., minus) -->
     <color name="control_icon_tint">@color/black_2</color>
+    <!-- Category tabs container background (light) -->
+    <color name="category_tabs_bg">@color/white_1</color>
+    <!-- Category tab stroke (light) -->
+    <color name="category_tab_stroke">@color/black</color>
+    <!-- BW stroke base (light) -->
+    <color name="bw_stroke_base">@color/white_2</color>
 </resources>

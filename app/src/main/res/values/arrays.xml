@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sort_options_labels">
+        <item>@string/sort_recommend</item>
+        <item>@string/sort_sales_desc</item>
+        <item>@string/sort_price_desc</item>
+        <item>@string/sort_price_asc</item>
+        <item>@string/sort_release_desc</item>
+    </string-array>
+    <string-array name="sort_options_keys">
+        <item>recommend</item>
+        <item>sales_desc</item>
+        <item>price_desc</item>
+        <item>price_asc</item>
+        <item>release_desc</item>
+    </string-array>
+</resources>

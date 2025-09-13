@@ -1,4 +1,58 @@
 <resources>
     <string name="app_name">GKiosk</string>
     <string name="close">닫기</string>
+    <!-- UI Demo / Sections -->
+    <string name="components_preview">Components Preview</string>
+    <string name="section_theme">Theme</string>
+    <string name="dark">Dark</string>
+    <string name="light">Light</string>
+    <string name="section_text">Text</string>
+    <string name="section_language">Language</string>
+    <string name="demo_title">Title / 타이틀</string>
+    <string name="demo_subtitle">SubTitle / 서브타이틀</string>
+    <string name="demo_body">Body / 바디 텍스트 – 설명 문구 예시입니다.</string>
+    <string name="demo_caption">Caption / 캡션</string>
+    <string name="section_buttons">Buttons</string>
+    <string name="btn_primary">Primary</string>
+    <string name="btn_outlined">Outlined</string>
+    <string name="btn_disabled">Disabled</string>
+    <string name="btn_clear_cart">장바구니 비우기</string>
+    <string name="section_toggles">Toggles</string>
+    <string name="language_korean">한국어</string>
+    <string name="language_english">English</string>
+    <string name="toggle_switch_label">스위치 (SwitchMaterial)</string>
+    <string name="checkbox_label">체크박스</string>
+    <string name="option_a">옵션 A</string>
+    <string name="option_b">옵션 B</string>
+    <string name="section_amount">Amount</string>
+    <string name="price_sample">₩ 12,345</string>
+    <string name="vat_included">부가세 포함 / VAT included</string>
+    <string name="section_card">Card</string>
+    <string name="section_card_title">섹션 카드 타이틀</string>
+    <string name="section_card_body">카드 컨텐츠 예시입니다. 관리 UI에서 사용될 기본 카드 레이아웃 샘플.</string>
+    <string name="section_cards_with_images">Cards with Images</string>
+    <string name="section_tabs">Tab 섹션</string>
+    <string name="section_sort">정렬</string>
+    <string name="sort_recommend">추천순</string>
+    <string name="sort_sales_desc">판매량 많은순</string>
+    <string name="sort_price_desc">가격 높은순</string>
+    <string name="sort_price_asc">가격 낮은순</string>
+    <string name="sort_release_desc">출시순</string>
+    <!-- Placeholders -->
+    <string name="brand_placeholder">BRAND</string>
+    <string name="product_name_placeholder">상품명 예시</string>
+    <string name="tag_placeholder">태그</string>
+    <string name="sub_all">전체</string>
+    <!-- Accessibility content descriptions -->
+    <string name="cd_add">추가</string>
+    <string name="cd_remove">제거</string>
+    <string name="cd_add_to_cart">장바구니에 추가</string>
+    <string name="cd_cancel">취소</string>
+    <string name="cd_qty_plus">수량 늘리기</string>
+    <string name="cd_qty_minus">수량 줄이기</string>
+    <string name="cd_product_image">상품 이미지</string>
+    <!-- Readable labels for product fields -->
+    <string name="cd_brand">브랜드 %1$s</string>
+    <string name="cd_title">상품명 %1$s</string>
+    <string name="cd_price">가격 %1$s</string>
 </resources>

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".GKioskApp"
         android:allowBackup="true"
@@ -12,12 +14,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GKiosk"
+        android:networkSecurityConfig="@xml/network_security_config"
         tools:targetApi="31">
 
         <activity
-            android:name=".Init_Category"
+            android:name=".ComponentPreview"
             android:exported="false"
-            android:label="Init_Category" />
+            android:label="ComponentPreview" />
+        <activity
+            android:name=".ApiDebugActivity"
+            android:exported="false"
+            android:label="API Debug" />
 
         <activity
             android:name=".Init_Splash"

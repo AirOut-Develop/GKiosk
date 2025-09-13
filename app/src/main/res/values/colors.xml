@@ -193,6 +193,9 @@
     <color name="purple_4">@color/purple_light_4</color>
     <color name="purple_border">@color/purple_light_border</color>
 
+    <!-- Segmented tabs container background (light blue with slight transparency) -->
+    <color name="seg_container_bg">#332784FF</color>
+
     <!-- Neutral aliases (theme-agnostic for now) -->
     <!-- Black neutrals -->
     <color name="neutral_black_0">@color/black_0</color>

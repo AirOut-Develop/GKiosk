@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Stroke uses BW base: light=white_2, night=black_2, same for both states -->
+    <item android:state_checked="true" android:color="@color/bw_stroke_base"/>
+    <item android:color="@color/bw_stroke_base"/>
+</selector>

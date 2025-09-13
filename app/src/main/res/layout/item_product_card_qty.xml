@@ -16,8 +16,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/space_xs">
+            android:layout_height="wrap_content">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/view_image"
@@ -26,30 +25,33 @@
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
                 android:src="@drawable/grad_01"
+                android:contentDescription="@string/cd_product_image"
                 tools:src="@drawable/grad_01"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintDimensionRatio="1:1.3"
+                app:layout_constraintDimensionRatio="1:1.1"
                 app:shapeAppearanceOverlay="@style/ShapeAppearanceGKioskCardTopOnly" />
 
             <LinearLayout
+                android:id="@+id/view_product_info"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingHorizontal="@dimen/space_m"
+                android:paddingHorizontal="@dimen/space_s"
                 android:paddingVertical="@dimen/space_s"
+                android:layout_margin="@dimen/space_xxs"
                 app:layout_constraintTop_toBottomOf="@id/view_image"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent">
+                app:layout_constraintBottom_toTopOf="@id/view_product_counter">
 
                 <TextView
                     android:id="@+id/view_brand"
                     style="@style/TextAppearance.GKiosk.Brand"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="BRAND" />
+                    android:text="@string/brand_placeholder" />
 
                 <TextView
                     android:id="@+id/view_title"
@@ -62,62 +64,70 @@
 
                 <TextView
                     android:id="@+id/view_price"
-                    style="@style/TextAppearance.GKiosk.Amount"
+                    style="@style/TextAppearance.GKiosk.AmountCart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="₩ 12,345" />
+                    tools:text="₩ 102,345" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/view_product_counter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/view_product_info"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:gravity="center">
 
                 <LinearLayout
+                    android:id="@+id/view_qty_controls"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/space_s"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:background="@drawable/bg_capsule_qty"
+                    android:paddingHorizontal="@dimen/space_s"
+                    android:paddingVertical="@dimen/space_xs">
 
-                    <LinearLayout
-                        android:id="@+id/view_qty_controls"
-                        android:layout_width="wrap_content"
+                    <ImageButton
+                        android:id="@+id/btn_qty_minus"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/bg_circle_outlined_black2"
+                        android:foreground="?attr/selectableItemBackgroundBorderless"
+                        android:padding="8dp"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_remove"
+                        android:contentDescription="@string/cd_qty_minus"
+                        app:tint="@color/control_icon_tint" />
+
+                    <TextView
+                        android:id="@+id/view_qty"
+                        style="@style/TextAppearance.GKiosk.Title"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:background="@drawable/bg_capsule_qty"
-                        android:paddingHorizontal="@dimen/space_s"
-                        android:paddingVertical="@dimen/space_xs">
+                        android:layout_marginHorizontal="@dimen/space_m"
+                        android:layout_weight="1"
+                        android:textSize="24sp"
+                        tools:text="1"
+                        android:textAlignment="center"/>
 
-                        <ImageButton
-                            android:id="@+id/btn_qty_minus"
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
-                            android:background="@drawable/bg_circle_outlined_black2"
-                            android:foreground="?attr/selectableItemBackgroundBorderless"
-                            android:padding="8dp"
-                            android:scaleType="center"
-                            android:src="@drawable/ic_remove"
-                            app:tint="@color/control_icon_tint" />
-
-                        <TextView
-                            android:id="@+id/view_qty"
-                            style="@style/TextAppearance.GKiosk.Title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="@dimen/space_m"
-                            android:textSize="24sp"
-                            tools:text="1" />
-
-                        <ImageButton
-                            android:id="@+id/btn_qty_plus"
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
-                            android:background="@drawable/bg_circle_fill_black2"
-                            android:foreground="?attr/selectableItemBackgroundBorderless"
-                            android:padding="8dp"
-                            android:scaleType="center"
-                            android:src="@drawable/ic_add"
-                            app:tint="@android:color/white" />
-                    </LinearLayout>
-
+                    <ImageButton
+                        android:id="@+id/btn_qty_plus"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/bg_circle_fill_black2"
+                        android:foreground="?attr/selectableItemBackgroundBorderless"
+                        android:padding="8dp"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_add"
+                        android:contentDescription="@string/cd_qty_plus"
+                        app:tint="@android:color/white" />
                 </LinearLayout>
 
             </LinearLayout>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -126,13 +136,14 @@
     <!-- Overlaid close button slightly outside top-right -->
     <ImageButton
         android:id="@+id/btn_card_close"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_gravity="top|end"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
-        android:elevation="12dp"
-        android:translationZ="12dp"
+        android:elevation="2dp"
+        android:translationZ="0dp"
+        android:stateListAnimator="@null"
         android:contentDescription="@string/close"
         android:background="@drawable/bg_circle_fill_red3"
         android:foreground="?attr/selectableItemBackgroundBorderless"

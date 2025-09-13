@@ -2,8 +2,10 @@
 <resources>
     <!-- Spacing scale -->
     <dimen name="space_0">0dp</dimen>
-    <dimen name="space_xs">4dp</dimen>
-    <dimen name="space_s">8dp</dimen>
+    <dimen name="space_xxs">4dp</dimen>
+    <dimen name="space_xs">8dp</dimen>
+    <dimen name="space_s">10dp</dimen>
+    <dimen name="space_ms">13dp</dimen>
     <dimen name="space_m">16dp</dimen>
     <dimen name="space_l">24dp</dimen>
     <dimen name="space_xl">32dp</dimen>

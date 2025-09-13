@@ -19,6 +19,7 @@
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
             android:src="@drawable/grad_04"
+            android:contentDescription="@string/cd_product_image"
             tools:src="@drawable/grad_04"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -42,14 +43,14 @@
                 style="@style/TextAppearance.GKiosk.Brand"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="BRAND" />
+                android:text="@string/brand_placeholder" />
 
             <TextView
                 style="@style/TextAppearance.GKiosk.Title"
                 android:id="@+id/view_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="상품명 예시"
+                android:text="@string/product_name_placeholder"
                 android:maxLines="1"
                 android:ellipsize="end"
                 app:autoSizeTextType="uniform"
@@ -62,7 +63,7 @@
                 style="@style/TextAppearance.GKiosk.Amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="₩ 12,345" />
+                android:text="@string/price_sample" />
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/view_tags"
@@ -74,7 +75,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/Widget.GKiosk.TagChip"
-                    android:text="태그" />
+                    android:text="@string/tag_placeholder" />
             </com.google.android.material.chip.ChipGroup>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

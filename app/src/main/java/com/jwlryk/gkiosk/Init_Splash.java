@@ -20,7 +20,7 @@ public class Init_Splash extends AppCompatActivity {
         long delayMs = getIntent().getLongExtra("delay_ms", DEFAULT_DELAY_MS);
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            Intent intent = new Intent(Init_Splash.this, Init_Category.class);
+            Intent intent = new Intent(Init_Splash.this, ApiDebugActivity.class);
             startActivity(intent);
             finish();
         }, delayMs);

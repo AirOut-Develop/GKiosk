@@ -40,6 +40,13 @@ dependencies {
     // material declared once above
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
     // RecyclerView 제거 (Flow 기반 고정 그리드 사용)
+    // REST client stack (reference-compatible)
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.11.0'
+    implementation 'com.google.code.gson:gson:2.10.1'
+    // WebSocket client (reference-compatible)
+    implementation 'org.java-websocket:Java-WebSocket:1.5.3'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'

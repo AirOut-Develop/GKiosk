@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">GKiosk</string>
+    <string name="close">Close</string>
+    <!-- UI Demo / Sections -->
+    <string name="components_preview">Components Preview</string>
+    <string name="section_theme">Theme</string>
+    <string name="dark">Dark</string>
+    <string name="light">Light</string>
+    <string name="section_text">Text</string>
+    <string name="section_language">Language</string>
+    <string name="demo_title">Title</string>
+    <string name="demo_subtitle">Subtitle</string>
+    <string name="demo_body">Body text — example description.</string>
+    <string name="demo_caption">Caption</string>
+    <string name="section_buttons">Buttons</string>
+    <string name="btn_primary">Primary</string>
+    <string name="btn_outlined">Outlined</string>
+    <string name="btn_disabled">Disabled</string>
+    <string name="btn_clear_cart">Clear cart</string>
+    <string name="section_toggles">Toggles</string>
+    <string name="language_korean">Korean</string>
+    <string name="language_english">English</string>
+    <string name="toggle_switch_label">Switch</string>
+    <string name="checkbox_label">Checkbox</string>
+    <string name="option_a">Option A</string>
+    <string name="option_b">Option B</string>
+    <string name="section_amount">Amount</string>
+    <string name="price_sample">₩ 12,345</string>
+    <string name="vat_included">VAT included</string>
+    <string name="section_card">Card</string>
+    <string name="section_card_title">Section card title</string>
+    <string name="section_card_body">Example card content. Base card layout sample for admin UI.</string>
+    <string name="section_cards_with_images">Cards with Images</string>
+    <string name="section_tabs">Tab Section</string>
+    <string name="section_sort">Sort</string>
+    <string name="sort_recommend">Recommended</string>
+    <string name="sort_sales_desc">Top sales</string>
+    <string name="sort_price_desc">Price: High to Low</string>
+    <string name="sort_price_asc">Price: Low to High</string>
+    <string name="sort_release_desc">Newest</string>
+    <!-- Placeholders -->
+    <string name="brand_placeholder">BRAND</string>
+    <string name="product_name_placeholder">Sample product</string>
+    <string name="tag_placeholder">Tag</string>
+    <string name="sub_all">All</string>
+    <!-- Accessibility content descriptions -->
+    <string name="cd_add">Add</string>
+    <string name="cd_remove">Remove</string>
+    <string name="cd_add_to_cart">Add to cart</string>
+    <string name="cd_cancel">Cancel</string>
+    <string name="cd_qty_plus">Increase quantity</string>
+    <string name="cd_qty_minus">Decrease quantity</string>
+    <string name="cd_product_image">Product image</string>
+    <!-- Readable labels for product fields -->
+    <string name="cd_brand">Brand %1$s</string>
+    <string name="cd_title">Title %1$s</string>
+    <string name="cd_price">Price %1$s</string>
+</resources>

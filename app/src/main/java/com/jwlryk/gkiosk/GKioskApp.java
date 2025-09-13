@@ -8,6 +8,7 @@ public class GKioskApp extends Application {
         super.onCreate();
         // Apply default theme (Dark prioritized)
         Global.applyNightMode();
+        // Apply stored locale if any (or system default)
+        Global.applyStoredLocale(this);
     }
 }
-

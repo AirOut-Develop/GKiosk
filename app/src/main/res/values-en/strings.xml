@@ -32,12 +32,12 @@
     <string name="section_card_body">Example card content. Base card layout sample for admin UI.</string>
     <string name="section_cards_with_images">Cards with Images</string>
     <string name="section_tabs">Tab Section</string>
-    <string name="section_sort">Sort</string>
-    <string name="sort_recommend">Recommended</string>
-    <string name="sort_sales_desc">Top sales</string>
-    <string name="sort_price_desc">Price: High to Low</string>
-    <string name="sort_price_asc">Price: Low to High</string>
-    <string name="sort_release_desc">Newest</string>
+    <string name="section_sort">정렬</string>
+    <string name="sort_recommend">추천순</string>
+    <string name="sort_sales_desc">판매량 많은순</string>
+    <string name="sort_price_desc">가격 높은순</string>
+    <string name="sort_price_asc">가격 낮은순</string>
+    <string name="sort_release_desc">출시순</string>
     <!-- Placeholders -->
     <string name="brand_placeholder">BRAND</string>
     <string name="product_name_placeholder">Sample product</string>

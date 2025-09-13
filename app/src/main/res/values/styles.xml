@@ -142,6 +142,26 @@
         <item name="cornerSizeBottomRight">0dp</item>
     </style>
 
+    <!-- Rounded image shape (no stroke) for detail images -->
+    <style name="ShapeAppearanceGKioskImage">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/radius_m</item>
+    </style>
+
+    <!-- Larger text variants for product detail -->
+    <style name="TextAppearance.GKiosk.Brand.Large" parent="TextAppearance.GKiosk.Brand">
+        <item name="android:textSize">30sp</item>
+    </style>
+    <style name="TextAppearance.GKiosk.Title.Large" parent="TextAppearance.GKiosk.Title">
+        <item name="android:textSize">45sp</item>
+    </style>
+    <style name="TextAppearance.GKiosk.Title.Medium" parent="TextAppearance.GKiosk.Title">
+        <item name="android:textSize">36sp</item>
+    </style>
+    <style name="TextAppearance.GKiosk.Amount.Large" parent="TextAppearance.GKiosk.Amount">
+        <item name="android:textSize">54sp</item>
+    </style>
+
     <!-- Compact outlined tag chip for product tags -->
     <style name="Widget.GKiosk.TagChip" parent="Widget.MaterialComponents.Chip.Choice">
         <item name="ensureMinTouchTargetSize">false</item>
@@ -216,6 +236,7 @@
         <item name="strokeWidth">1dp</item>
         <item name="strokeColor">@color/bw_stroke</item>
         <item name="backgroundTint">@color/bw_bg</item>
+        <item name="background">@color/bw_bg</item>
         <item name="android:textColor">@color/bw_text</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">28sp</item>

@@ -43,6 +43,7 @@ public class ApiDebugActivity extends AppCompatActivity {
     private EditText etBaseUrl;
     private EditText etStoreCode;
     private EditText etDeviceCode;
+    private EditText etWsEndpoint;
     private EditText etCompanyNumber;
 
     @Override
@@ -57,6 +58,7 @@ public class ApiDebugActivity extends AppCompatActivity {
         etBaseUrl = findViewById(R.id.et_base_url);
         etStoreCode = findViewById(R.id.et_store_code);
         etDeviceCode = findViewById(R.id.et_device_code);
+        etWsEndpoint = findViewById(R.id.et_ws_endpoint);
         tvRequestJson.setMovementMethod(new ScrollingMovementMethod());
         tvApiJson.setMovementMethod(new ScrollingMovementMethod());
 
@@ -67,6 +69,7 @@ public class ApiDebugActivity extends AppCompatActivity {
         if (ki.getApiBaseUrl() != null) etBaseUrl.setText(ki.getApiBaseUrl());
         if (ki.getStoreCode() != null) etStoreCode.setText(ki.getStoreCode());
         if (ki.getKioskCode() != null) etDeviceCode.setText(ki.getKioskCode());
+        if (ki.getWsEndpoint() != null) etWsEndpoint.setText(ki.getWsEndpoint());
 
         Button btnRefreshSingleton = findViewById(R.id.btn_refresh_singleton);
         Button btnClearCart = findViewById(R.id.btn_clear_cart_singleton);
@@ -360,13 +363,17 @@ public class ApiDebugActivity extends AppCompatActivity {
 
     private void applyConfigToSingleton() {
         String baseUrl = etBaseUrl.getText().toString().trim();
+        String ws = etWsEndpoint.getText().toString().trim();
         String storeCode = etStoreCode.getText().toString().trim();
         String deviceCode = etDeviceCode.getText().toString().trim();
         KioskInfo.getInstance()
                 .setApiBaseUrl(baseUrl.isEmpty() ? null : baseUrl)
+                .setWsEndpoint(ws.isEmpty() ? null : ws)
                 .setStoreCode(storeCode)
                 .setKioskCode(deviceCode);
-        com.jwlryk.gkiosk.data.KioskPrefs.saveBasics(this, baseUrl.isEmpty() ? null : baseUrl, storeCode, deviceCode);
+        com.jwlryk.gkiosk.data.KioskPrefs.saveBasics(this, baseUrl.isEmpty() ? null : baseUrl, ws.isEmpty() ? null : ws, storeCode, deviceCode);
+        // Reset API client so new baseUrl applies immediately
+        com.jwlryk.gkiosk.remote.api.ApiClient.reset();
         renderSingletonState();
     }
 

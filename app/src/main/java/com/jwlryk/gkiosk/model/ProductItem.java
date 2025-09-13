@@ -19,6 +19,7 @@ public class ProductItem {
     private long price; // in minor units (KRW)
     private List<String> tags = new ArrayList<>();
     private String image; // drawable key
+    private String detailImage; // large/detail image url
     private String ratio; // e.g., "1:1.1"
     private String category; // optional
 
@@ -101,6 +102,8 @@ public class ProductItem {
     }
     public String getImage() { return image; }
     public void setImage(String image) { this.image = image; }
+    public String getDetailImage() { return detailImage; }
+    public void setDetailImage(String detailImage) { this.detailImage = detailImage; }
     public String getRatio() { return ratio; }
     public void setRatio(String ratio) { this.ratio = ratio; }
     public String getCategory() { return category; }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
-    <base-config>
+    <base-config cleartextTrafficPermitted="true">
         <!-- 사용자 인증서도 허용 -->
         <trust-anchors>
             <certificates src="system" />
@@ -8,4 +8,3 @@
         </trust-anchors>
     </base-config>
 </network-security-config>
-

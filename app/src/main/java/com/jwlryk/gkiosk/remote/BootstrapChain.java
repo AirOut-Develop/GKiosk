@@ -116,10 +116,15 @@ public final class BootstrapChain {
             lp.setTitle(rp.name);
             lp.setBrand(rp.brand);
             lp.setCategory(rp.category);
+            // Map images and price like KioskRemoteOps for consistency
+            lp.setImage(rp.imageMain);
+            lp.setDetailImage(rp.imageDetail);
             lp.setPrice(rp.price);
             lp.setVendingSlotNumber(rp.positionIndex);
             lp.setSortOrder(rp.displayIndex);
             lp.setActive(rp.status == 1);
+            // Normalize categories and tags (GKVEN codes, comma-separated)
+            com.jwlryk.gkiosk.remote.KioskRemoteOps.applyCategoryAndTags(rp, lp);
             local.add(lp);
         }
         ProductItemList.getInstance().setAll(local);
@@ -142,4 +147,3 @@ public final class BootstrapChain {
         return t == null ? "unknown" : t.getMessage();
     }
 }
-

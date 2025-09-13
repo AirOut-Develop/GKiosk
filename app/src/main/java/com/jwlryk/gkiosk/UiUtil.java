@@ -26,6 +26,22 @@ public class UiUtil {
         }
     }
 
+    // Overload: apply immersive mode to an arbitrary Window (e.g., Dialog window)
+    public static void enableImmersiveMode(Window window) {
+        if (window == null) return;
+        View decor = window.getDecorView();
+        // Draw content edge-to-edge
+        WindowCompat.setDecorFitsSystemWindows(window, false);
+
+        WindowInsetsControllerCompat controller = WindowCompat.getInsetsController(window, decor);
+        if (controller != null) {
+            controller.setSystemBarsBehavior(
+                    WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            );
+            controller.hide(WindowInsetsCompat.Type.systemBars());
+        }
+    }
+
     // Scales the entire activity content to fit a target "design" width in dp.
     // Useful for very-small screens to render kiosk UIs proportionally smaller.
     public static void applyDesignScale(Activity activity, int designWidthDp) {

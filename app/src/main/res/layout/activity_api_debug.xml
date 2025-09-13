@@ -31,6 +31,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <EditText
+                    android:id="@+id/et_ws_endpoint"
+                    android:hint="wss://example/ws"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <EditText
                     android:id="@+id/et_store_code"
                     android:hint="Store code"
                     android:layout_width="match_parent"

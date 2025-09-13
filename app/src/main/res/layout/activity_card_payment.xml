@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/space_l">
+
+    <TextView
+        android:id="@+id/cp_header"
+        style="@style/TextAppearance.GKiosk.Title.Large"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="카드 결제" />
+
+    <ImageView
+        android:id="@+id/cp_image"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="@dimen/space_m"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/cp_title"
+        style="@style/TextAppearance.GKiosk.Title.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_m" />
+
+    <TextView
+        android:id="@+id/cp_price"
+        style="@style/TextAppearance.GKiosk.Amount.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_s" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_l"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/cp_btn_pay"
+            style="@style/Widget.GKiosk.PrimaryButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="결제 진행" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/cp_btn_cancel"
+            style="@style/Widget.GKiosk.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="@dimen/space_m"
+            android:text="취소" />
+    </LinearLayout>
+
+</LinearLayout>
+

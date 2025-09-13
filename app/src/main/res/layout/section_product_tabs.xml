@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/space_m"
+    android:background="@color/white">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_m"
+        android:orientation="horizontal"
+        android:clipChildren="false">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_s"
+                android:fillViewport="false"
+                android:scrollbars="none">
+                <com.google.android.material.button.MaterialButtonToggleGroup
+                    android:id="@+id/view_category_tabs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="true"
+                    app:selectionRequired="true" />
+            </HorizontalScrollView>
+
+            <LinearLayout
+                android:id="@+id/view_sort_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/space_s"
+                android:layout_marginStart="@dimen/space_s"/>
+
+            <LinearLayout
+                android:id="@+id/view_pagination_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_m"
+                android:gravity="end">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_page_prev"
+                    style="@style/Widget.GKiosk.PillButton.BW"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="이전" />
+
+                <TextView
+                    android:id="@+id/view_page_info"
+                    style="@style/TextAppearance.GKiosk.Body"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_s"
+                    android:layout_marginEnd="@dimen/space_s"
+                    android:text="1/1" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_page_next"
+                    style="@style/Widget.GKiosk.PillButton.BW"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="다음" />
+            </LinearLayout>
+
+            <androidx.gridlayout.widget.GridLayout
+                android:id="@+id/grid_tab_items"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_s"
+                app:columnCount="4"
+                app:useDefaultMargins="true" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:clipChildren="false">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_buy"
+                style="@style/Widget.GKiosk.PrimaryButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/buy_action"
+                android:textSize="34sp"
+                android:minHeight="100dp"
+                android:textFontWeight="700"
+                app:icon="@drawable/baseline_wallet_24"
+                app:iconGravity="textStart"
+                />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/space_l"
+                android:background="@drawable/bg_rounded_image">
+                <TextView
+                    style="@style/TextAppearance.GKiosk.Title.Medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_l"
+                    android:text="장바구니"
+                    android:textAlignment="center"/>
+
+                <LinearLayout
+                    android:id="@+id/product_cart_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:clipChildren="false"
+                    android:paddingStart="@dimen/space_0">
+
+                    <include
+                        android:id="@+id/cart_inc_1"
+                        layout="@layout/item_product_card_qty" />
+                    <include
+                        android:id="@+id/cart_inc_2"
+                        layout="@layout/item_product_card_qty" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

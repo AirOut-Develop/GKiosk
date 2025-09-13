@@ -5,6 +5,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -22,7 +23,15 @@ public interface ApiService {
     @GET("/device/{DeviceCode}/products")
     Call<ApiResponse<java.util.List<Product>>> getProductsByDeviceCode(@Path("DeviceCode") String deviceCode);
 
+    @GET("/device/{DeviceCode}/products")
+    Call<ApiResponse<java.util.List<Product>>> getProductsByDeviceCodeAndCategory(
+            @Path("DeviceCode") String deviceCode,
+            @Query("category") String categoryCode
+    );
+
+    @GET("/productCategory")
+    Call<ApiResponse<java.util.List<ProductCategory>>> getProductCategories(@Query("class") String clazz);
+
     @POST("/sales")
     Call<ApiResponse<Void>> createSale(@Body Sale sale);
 }
-

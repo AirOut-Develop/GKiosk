@@ -23,6 +23,124 @@
             android:text="@string/components_preview"
             android:paddingBottom="@dimen/space_m" />
 
+        <!-- Section: Style Guide (Typography, Buttons, Colors, Spacing) -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/view_section_style_guide"
+            style="@style/Widget.GKiosk.Card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space_m">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/space_m">
+
+                <TextView
+                    style="@style/TextAppearance.GKiosk.SectionTitle"
+                    android:text="@string/section_style_guide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <!-- Typography guide -->
+                <TextView
+                    style="@style/TextAppearance.GKiosk.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_s"
+                    android:text="@string/guide_typography_title" />
+                <TextView
+                    style="@style/TextAppearance.GKiosk.SubTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/guide_typography_subtitle" />
+                <TextView
+                    style="@style/TextAppearance.GKiosk.Body"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/guide_typography_body" />
+                <TextView
+                    style="@style/TextAppearance.GKiosk.Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/guide_typography_caption" />
+
+                <!-- Buttons guide (labels only; actual examples are below) -->
+                <TextView
+                    style="@style/TextAppearance.GKiosk.SectionTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_m"
+                    android:text="@string/guide_buttons_header" />
+                <TextView
+                    style="@style/TextAppearance.GKiosk.Body"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    android:text="@string/guide_buttons_list" />
+
+                <!-- Colors guide -->
+                <TextView
+                    style="@style/TextAppearance.GKiosk.SectionTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_m"
+                    android:text="@string/guide_colors_header" />
+                <TextView
+                    style="@style/TextAppearance.GKiosk.Body"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    android:text="@string/guide_colors_list" />
+
+                <!-- Spacing guide -->
+                <TextView
+                    style="@style/TextAppearance.GKiosk.SectionTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_m"
+                    android:text="@string/guide_spacing_header" />
+                <TextView
+                    style="@style/TextAppearance.GKiosk.Body"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    android:text="@string/guide_spacing_list" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Section: Product Detail Popup (test) -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/view_section_popup"
+            style="@style/Widget.GKiosk.Card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space_m">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/space_m">
+
+                <TextView
+                    style="@style/TextAppearance.GKiosk.SectionTitle"
+                    android:text="@string/section_product_detail_popup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_show_product_detail"
+                    style="@style/Widget.GKiosk.PrimaryButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_s"
+                    android:text="@string/btn_show_product_detail" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
         <!-- Section: Theme Toggle -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/view_section_theme"

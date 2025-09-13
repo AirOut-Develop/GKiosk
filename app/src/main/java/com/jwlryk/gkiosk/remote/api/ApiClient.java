@@ -11,6 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public final class ApiClient {
     private static volatile ApiService service;
+    private static volatile String lastBaseUrl;
 
     private ApiClient() {}
 
@@ -36,9 +37,23 @@ public final class ApiClient {
                             .addConverterFactory(GsonConverterFactory.create(gson))
                             .build();
                     service = retrofit.create(ApiService.class);
+                    lastBaseUrl = baseUrl;
                 }
             }
         }
+        // Recreate if baseUrl changed
+        String current = KioskInfo.getInstance().getApiBaseUrl();
+        if (current == null || current.isEmpty()) current = "https://hub.airout.kr:8800/";
+        if (!current.endsWith("/")) current = current + "/";
+        if (lastBaseUrl == null || !lastBaseUrl.equals(current)) {
+            reset();
+            return get();
+        }
         return service;
+    }
+
+    public static synchronized void reset() {
+        service = null;
+        lastBaseUrl = null;
     }
 }

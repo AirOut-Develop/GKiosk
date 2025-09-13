@@ -31,6 +31,8 @@
     <string name="section_card_title">섹션 카드 타이틀</string>
     <string name="section_card_body">카드 컨텐츠 예시입니다. 관리 UI에서 사용될 기본 카드 레이아웃 샘플.</string>
     <string name="section_cards_with_images">Cards with Images</string>
+    <string name="section_style_guide">스타일 가이드</string>
+    <string name="section_product_detail_guide">상품 상세 디자인 가이드</string>
     <string name="section_tabs">Tab 섹션</string>
     <string name="section_sort">정렬</string>
     <string name="sort_recommend">추천순</string>
@@ -38,6 +40,21 @@
     <string name="sort_price_desc">가격 높은순</string>
     <string name="sort_price_asc">가격 낮은순</string>
     <string name="sort_release_desc">출시순</string>
+    
+    <!-- Style guide texts -->
+    <string name="guide_typography_title">타이틀 — style: TextAppearance.GKiosk.Title</string>
+    <string name="guide_typography_subtitle">서브타이틀 — style: TextAppearance.GKiosk.SubTitle</string>
+    <string name="guide_typography_body">바디 — style: TextAppearance.GKiosk.Body</string>
+    <string name="guide_typography_caption">캡션 — style: TextAppearance.GKiosk.Caption</string>
+
+    <string name="guide_buttons_header">버튼 스타일</string>
+    <string name="guide_buttons_list">Widget.GKiosk.PrimaryButton, Widget.GKiosk.OutlinedButton, Widget.GKiosk.IconButton.*</string>
+
+    <string name="guide_colors_header">컬러 키</string>
+    <string name="guide_colors_list">primary_main / darker / lighter, text_primary / secondary / caption</string>
+
+    <string name="guide_spacing_header">간격 스케일</string>
+    <string name="guide_spacing_list">space_xxs, space_xs, space_s, space_m, space_l, space_xl</string>
     <!-- Placeholders -->
     <string name="brand_placeholder">BRAND</string>
     <string name="product_name_placeholder">상품명 예시</string>
@@ -55,4 +72,25 @@
     <string name="cd_brand">브랜드 %1$s</string>
     <string name="cd_title">상품명 %1$s</string>
     <string name="cd_price">가격 %1$s</string>
+    
+    <!-- Kiosk settings (renamed from init category) -->
+    <string name="init_category_title">키오스크 설정</string>
+    <string name="api_debug">API Debug</string>
+    <string name="components_preview_desc">UI 컴포넌트 스타일/샘플 확인</string>
+    <string name="api_debug_desc">스토어/디바이스/상품 API 테스트</string>
+    <string name="icon_cp">CP</string>
+    <string name="icon_api">API</string>
+    <string name="buy_action">구매하기</string>
+    <string name="card_pay_started">카드 결제를 시작합니다…</string>
+    <string name="product_list">Product List</string>
+    <string name="product_list_desc">저장된 설정으로 상품 리스트 보기</string>
+    <string name="icon_pl">PL</string>
+    
+    <!-- Product detail actions -->
+    <string name="btn_buy_now">바로구매</string>
+    <string name="btn_add_to_cart">장바구니 담기</string>
+    
+    <!-- Popup test -->
+    <string name="section_product_detail_popup">상품 상세 팝업</string>
+    <string name="btn_show_product_detail">상품 상세 보기</string>
 </resources>

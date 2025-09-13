@@ -24,6 +24,10 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 import android.view.ContextThemeWrapper;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.graphics.Insets;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintLayout.LayoutParams;
 import androidx.constraintlayout.widget.ConstraintSet;
@@ -34,6 +38,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+// Preview-only screen: no remote API coupling here.
 
 public class ComponentPreview extends AppCompatActivity {
     @Override
@@ -118,6 +123,157 @@ public class ComponentPreview extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        // Product detail popup test button
+        View btnDetail = findViewById(R.id.btn_show_product_detail);
+        if (btnDetail != null) {
+            btnDetail.setOnClickListener(v -> showProductDetailBottomSheet());
+        }
+
+        // No inline product detail guide; popup only
+    }
+
+    private void showProductDetailBottomSheet() {
+        JSONObject obj = null;
+        try {
+            JSONArray products = new JSONArray(loadAssetText("products_sample.json"));
+            if (products.length() > 0) obj = products.getJSONObject(0);
+        } catch (Exception ignored) {}
+        if (obj == null) {
+            // Fallback dummy
+            obj = new JSONObject();
+            try {
+                obj.put("brand", "BRAND");
+                obj.put("title", "샘플 상품명");
+                obj.put("price", 12345);
+                obj.put("image", "grad_03");
+            } catch (JSONException ignored) {}
+        }
+
+        androidx.appcompat.app.AlertDialog dialog = new androidx.appcompat.app.AlertDialog.Builder(this)
+                .setView(getLayoutInflater().inflate(R.layout.dialog_product_detail, null))
+                .setCancelable(true)
+                .create();
+        dialog.show();
+        // For dialogs, avoid immersive to prevent first-tap consumption by system bars.
+        if (dialog.getWindow() != null) {
+            WindowCompat.setDecorFitsSystemWindows(dialog.getWindow(), true);
+        }
+        android.view.View content = dialog.findViewById(android.R.id.content);
+        if (content instanceof android.view.ViewGroup) {
+            // Root of dialog content is a FrameLayout; get child 0
+            if (((android.view.ViewGroup) content).getChildCount() > 0) {
+                content = ((android.view.ViewGroup) content).getChildAt(0);
+            }
+        }
+
+        // Apply bottom inset padding so buttons/scroll area don't sit under nav bar
+        if (content != null) {
+            final android.view.View card = content.findViewById(R.id.dialog_card);
+            if (card != null) {
+                ViewCompat.setOnApplyWindowInsetsListener(card, (v, insets) -> {
+                    Insets sb = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+                    v.setPadding(v.getPaddingLeft(), v.getPaddingTop(), v.getPaddingRight(), sb.bottom);
+                    return insets;
+                });
+                ViewCompat.requestApplyInsets(card);
+            }
+        }
+
+        // Bind common product detail layout inside dialog
+        bindProductDetailToRoot(content, obj);
+
+        android.view.View close = content != null ? content.findViewById(R.id.btn_dialog_close) : null;
+        if (close != null) close.setOnClickListener(v -> dialog.dismiss());
+
+        // Make dialog large and centered
+        android.view.Window window = dialog.getWindow();
+        if (window != null) {
+            // Transparent window background to reveal rounded card corners
+            window.setBackgroundDrawable(new android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT));
+            android.util.DisplayMetrics dm = getResources().getDisplayMetrics();
+            int width = (int) (dm.widthPixels * 0.9f);
+            int height = (int) (dm.heightPixels * 0.9f);
+            window.setLayout(width, height);
+        }
+    }
+
+    private JSONObject defaultSampleProduct() {
+        JSONObject o = new JSONObject();
+        try {
+            o.put("brand", "BRAND");
+            o.put("title", "샘플 상품명");
+            o.put("price", 12345);
+            o.put("image", "grad_03");
+        } catch (JSONException ignored) {}
+        return o;
+    }
+
+    private void bindProductDetailToRoot(View root, JSONObject obj) {
+        if (root == null || obj == null) return;
+        TextView brand = root.findViewById(R.id.detail_brand);
+        TextView title = root.findViewById(R.id.detail_title);
+        TextView price = root.findViewById(R.id.detail_price);
+        TextView desc = root.findViewById(R.id.detail_desc);
+        com.google.android.material.imageview.ShapeableImageView image = root.findViewById(R.id.detail_image);
+        android.widget.ImageView imageLarge = root.findViewById(R.id.detail_image_large);
+        ChipGroup detailTags = root.findViewById(R.id.detail_tags);
+
+        if (brand == null && title == null && price == null && image == null) return; // layout not present
+
+        String brandStr = obj.optString("brand", getString(R.string.brand_placeholder));
+        String titleStr = obj.optString("title", getString(R.string.product_name_placeholder));
+        String priceStr = formatPrice(obj.optLong("price", 0));
+        if (brand != null) brand.setText(brandStr);
+        if (title != null) title.setText(titleStr);
+        if (price != null) price.setText(priceStr);
+        if (desc != null) desc.setText(getString(R.string.vat_included));
+        int thumbRes = R.drawable.product_thumnail; // PNG exists with this exact name
+        int detailRes = R.drawable.product_detail;  // use existing PNG ("detail")
+        if (image != null) image.setImageResource(thumbRes);
+        if (imageLarge != null) imageLarge.setImageResource(detailRes);
+
+        // Apply aspect ratios after layout: top 1:1.1, bottom 9:16
+        if (image != null) {
+            image.post(() -> {
+                int w = image.getWidth();
+                if (w > 0) {
+                    int h = Math.round(w * 1.1f);
+                    android.view.ViewGroup.LayoutParams lp = image.getLayoutParams();
+                    lp.height = h;
+                    image.setLayoutParams(lp);
+                }
+            });
+        }
+        // ScrollView now uses weight to occupy remaining space; no fixed ratio height.
+
+        // Bind tags below description
+        if (detailTags != null) {
+            detailTags.removeAllViews();
+            JSONArray arr = obj.optJSONArray("tags");
+            if (arr != null) {
+                for (int t = 0; t < arr.length(); t++) {
+                    String tag = arr.optString(t);
+                    if (tag == null || tag.isEmpty()) continue;
+                    Chip chip = (Chip) getLayoutInflater().inflate(R.layout.view_tag_chip, detailTags, false);
+                    chip.setText(tag);
+                    detailTags.addView(chip);
+                }
+            }
+        }
+
+        // Wire quantity +/- for demo
+        final int[] qty = {1};
+        TextView qtyText = root.findViewById(R.id.detail_qty_text);
+        View minus = root.findViewById(R.id.detail_qty_minus);
+        View plus = root.findViewById(R.id.detail_qty_plus);
+        if (qtyText != null) qtyText.setText(String.valueOf(qty[0]));
+        if (minus != null) minus.setOnClickListener(v -> {
+            if (qty[0] > 1) { qty[0]--; if (qtyText != null) qtyText.setText(String.valueOf(qty[0])); }
+        });
+        if (plus != null) plus.setOnClickListener(v -> {
+            qty[0]++; if (qtyText != null) qtyText.setText(String.valueOf(qty[0]));
+        });
     }
 
     private void bindCartQtyControls(View cardRoot, JSONObject obj) {
@@ -262,46 +418,33 @@ public class ComponentPreview extends AppCompatActivity {
             itemsJson = defaultItemsJson();
         }
 
-        // Build category tabs (supports object {key,name} or string "Key:Name")
+        // Build category tabs from local preview JSON only
         MaterialButtonToggleGroup group = findViewById(R.id.view_category_tabs);
         if (group != null) {
             group.removeAllViews();
             for (int i = 0; i < categoriesJson.length(); i++) {
                 String key = "";
                 String label = "";
-                // Accept both object and string formats
-                Object elem = categoriesJson.get(i);
+                Object elem = categoriesJson.opt(i);
                 if (elem instanceof org.json.JSONObject) {
                     JSONObject cat = (JSONObject) elem;
                     String nm = cat.optString("name", "");
                     String k = cat.optString("key", "");
                     String combined = cat.optString("label", "");
-                    if (!nm.isEmpty() && !k.isEmpty()) {
-                        key = k; label = nm;
-                    } else if (!combined.isEmpty()) {
+                    if (!nm.isEmpty() && !k.isEmpty()) { key = k; label = nm; }
+                    else if (!combined.isEmpty()) {
                         int idx = combined.indexOf(":");
-                        if (idx >= 0) {
-                            key = combined.substring(0, idx);
-                            label = combined.substring(idx + 1);
-                        } else {
-                            key = k.isEmpty() ? combined : k;
-                            label = nm.isEmpty() ? combined : nm;
-                        }
-                    } else {
-                        key = k;
-                        label = nm.isEmpty() ? k : nm;
-                    }
+                        if (idx >= 0) { key = combined.substring(0, idx); label = combined.substring(idx + 1); }
+                        else { key = k.isEmpty() ? combined : k; label = nm.isEmpty() ? combined : nm; }
+                    } else { key = k; label = nm.isEmpty() ? k : nm; }
                 } else {
                     String s = categoriesJson.optString(i);
                     int idx = s.indexOf(":");
-                    if (idx >= 0) {
-                        key = s.substring(0, idx);
-                        label = s.substring(idx + 1);
-                    } else {
-                        key = s;
-                        label = s;
-                    }
+                    if (idx >= 0) { key = s.substring(0, idx); label = s.substring(idx + 1); }
+                    else { key = s; label = s; }
                 }
+
+                if ("ALL".equalsIgnoreCase(key)) label = getString(R.string.sub_all);
 
                 ContextThemeWrapper themed = new ContextThemeWrapper(this, R.style.Widget_GKiosk_TabButton_BW);
                 MaterialButton btn = new MaterialButton(themed, null, 0);
@@ -312,13 +455,11 @@ public class ComponentPreview extends AppCompatActivity {
                 btn.setTag(key);
                 MaterialButtonToggleGroup.LayoutParams lp = new MaterialButtonToggleGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 int m = getResources().getDimensionPixelSize(R.dimen.space_m);
-                int end = (i == categoriesJson.length() - 1) ? 0 : m; // no trailing margin on last
+                int end = (i == categoriesJson.length() - 1) ? 0 : m;
                 lp.setMargins(0, 0, end, 0);
                 btn.setLayoutParams(lp);
                 group.addView(btn);
-                if ("All".equals(key)) {
-                    group.check(btn.getId());
-                }
+                if ("All".equals(key)) group.check(btn.getId());
             }
             group.addOnButtonCheckedListener((g, checkedId, isChecked) -> {
                 if (isChecked) {
@@ -338,6 +479,8 @@ public class ComponentPreview extends AppCompatActivity {
         buildSortTabs();
         renderTabItems();
     }
+
+    // No network fetching in preview.
 
     private JSONArray defaultCategoriesJson() {
         JSONArray arr = new JSONArray();
@@ -555,7 +698,7 @@ public class ComponentPreview extends AppCompatActivity {
             MaterialButton btn = new MaterialButton(themed, null, 0);
             btn.setText(label);
             btn.setCheckable(true);
-            applyBwTabStyle(btn);
+            applyBwPillStyle(btn);
             btn.setChecked(key.equals(selectedSubTagKey));
             btn.setOnClickListener(v -> {
                 selectedSubTagKey = key;
@@ -660,6 +803,15 @@ public class ComponentPreview extends AppCompatActivity {
         if (txt != null) btn.setTextColor(txt);
         if (stroke != null) btn.setStrokeColor(stroke);
         if (ripple != null) btn.setRippleColor(ripple);
+    }
+
+    private void applyBwPillStyle(MaterialButton btn) {
+        ColorStateList bg = AppCompatResources.getColorStateList(this, R.color.bw_bg);
+        ColorStateList txt = AppCompatResources.getColorStateList(this, R.color.bw_text);
+        ColorStateList stroke = AppCompatResources.getColorStateList(this, R.color.bw_stroke);
+        if (bg != null) btn.setBackgroundTintList(bg);
+        if (txt != null) btn.setTextColor(txt);
+        if (stroke != null) btn.setStrokeColor(stroke);
     }
 
     @Override
